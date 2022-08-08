@@ -1,0 +1,38 @@
+
+    // $background:  blue;
+    // $foreground: white;
+    // $accent: green;
+    // $is-dark: black;
+
+    // login {
+
+    //     #login {
+
+    //         #login-intro {
+    //             color: white;
+    //         }
+
+    //         #login-form-wrapper {
+    //             @if ($is-dark) {
+    //                 background: mat-color($accent, 600);
+    //             } @else {
+    //                 background: map-get($background, card);
+    //             }
+
+    //             #login-form {
+
+    //                 .separator {
+    //                     color: map-get($foreground, divider);
+
+    //                     .text {
+
+    //                         &:before,
+    //                         &:after {
+    //                             border-top-color: map-get($foreground, divider);
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }

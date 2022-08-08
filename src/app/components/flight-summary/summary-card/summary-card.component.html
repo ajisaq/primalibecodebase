@@ -1,0 +1,231 @@
+<div class="row">
+  <div class="accordion my-4" id="fareRulesAccordion">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="flush-headingOne">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+          <span class="primal-text-bold">Rules</span>
+        </button>
+      </h2>
+      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+        data-bs-parent="#fareRulesAccordion">
+        <div class="accordion-body">
+          <div class="row">
+            <div *ngFor="let flightSummaryDetail of flightSummaryDetails; let i=index" class="col-12">
+              <h4 class="primal-text-bold">Journey {{i+1}}: {{flightSummaryDetail.dapartAirportCode}} -
+                {{flightSummaryDetail.arriveAirportCode}}</h4>
+              <ul class="flight-rules-list-items">
+                <li *ngFor="let clusterRule of flightSummaryDetail.clusterRules"
+                  class="flight-rules-list-item light-weight">
+                  {{clusterRule.text}}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card primal-bg order-md-first">
+    <div class="card-body">
+      <div class="row">
+        <div class="">
+          <div class="row">
+            <div *ngFor="let flightDetail of flightSummaryDetails; let i=index;"
+              class="{{(flightSummaryDetails.length == 1) ? 'col-12' : 'col-6'}}">
+              <!-- <h4 class="primal-text-bold">Outbound</h4> -->
+              <h4 *ngIf="flightSummaryDetails.length > 2 || i != 1" class="primal-text-bold">Outbound</h4>
+              <h4 *ngIf="flightSummaryDetails.length == 2 && i == 1" class="primal-text-bold">Inbound</h4>
+              <p class="light-weight text-small">Flight: {{flightDetail?.flightNumber}}</p>
+              <p class="light-weight text-small">{{flightDetail?.dapartDate}}</p>
+              <div class="row">
+                <div class="
+                col
+                d-flex
+                flex-column
+                position-relative
+                duration-container
+              ">
+                  <span class="circle"></span>
+                  <span class="vertical-line"></span>
+                  <span class="circle"></span>
+                </div>
+                <div class="col d-flex flex-column justify-content-between">
+                  <span class="primal-text-bold">{{flightDetail?.etd}}</span>
+                  <span class="primal-text-bold">{{flightDetail?.eta}}</span>
+                </div>
+                <div class="col d-flex flex-column justify-content-between">
+                  <span class="light-weight">{{flightDetail?.dapartCity}}</span>
+                  <span class="light-weight">{{flightDetail?.arriveCity}}</span>
+                </div>
+              </div>
+              <div class="mt-3">
+                <p class="light-weight text-small">Duration: {{flightDetail?.flightDuration}}</p>
+                <p class="light-weight text-small">Cabin Class: {{flightDetail?.cabinClass}}</p>
+                <p class="light-weight text-small">Booking Class: {{flightDetail?.bookingClass | uppercase}}
+                </p>
+              </div>
+              <!-- <button type="button" class="btn btn-md primal-border-info text-white rounded-10" data-bs-toggle="modal"
+                data-bs-target="#modifysearchModal">
+                Edit
+              </button> -->
+            </div>
+            <!-- <div *ngIf="flightSummaryDetails.length > 1" class="col-6">
+              <h4 class="primal-text-bold mt-4 mt-md-0">Inbound</h4>
+              <p class="light-weight text-small">Flight: {{flightSummaryDetails[1]?.flightNumber}}</p>
+              <p class="light-weight text-small">{{flightSummaryDetails[1]?.dapartDate}}</p>
+              <div class="row">
+                <div class="
+                col
+                d-flex
+                flex-column
+                position-relative
+                duration-container
+              ">
+                  <span class="circle"></span>
+                  <span class="vertical-line"></span>
+                  <span class="circle"></span>
+                </div>
+                <div class="col d-flex flex-column justify-content-between">
+                  <span class="primal-text-bold">{{flightSummaryDetails[1]?.etd}}</span>
+                  <span class="primal-text-bold">{{flightSummaryDetails[1]?.eta}}</span>
+                </div>
+                <div class="col d-flex flex-column justify-content-between">
+                  <span class="light-weight">{{flightSummaryDetails[1]?.dapartCity}}</span>
+                  <span class="light-weight">{{flightSummaryDetails[1]?.arriveCity}}</span>
+                </div>
+              </div>
+              <div class="mt-3">
+                <p class="light-weight text-small">Duration: {{flightSummaryDetails[1]?.flightDuration}}</p>
+                <p class="light-weight text-small">Cabin Class: {{flightSummaryDetails[1]?.cabinClass}}</p>
+                <p class="light-weight text-small">Booking Class: {{flightSummaryDetails[1]?.bookingClass | uppercase}}
+                </p>
+              </div>
+
+            </div> -->
+
+          </div>
+          <!-- <button type="button" class="btn btn-md primal-border-info mt-4 text-white rounded-10" data-bs-toggle="modal"
+            data-bs-target="#modifysearchModal">
+            Edit
+          </button> -->
+          <button (click)="openDialog()" class="btn btn-md primal-border-info mt-4 text-white rounded-10">Edit</button>
+          <div class="row mt-4 mt-md-0">
+            <div class="col-12">
+              <h4 class="primal-text-bold">Pricing Details</h4>
+              <p class="text-small leight-weight">Ticket Cost: N{{pricingDetails.ticketCost | number }}</p>
+              <p class="text-small leight-weight">Total Tax Amount: N{{pricingDetails.totalTaxAmount | number}}</p>
+              <p class="text-small leight-weight">Total Surcharge: N{{pricingDetails.totalSurcharge | number}}</p>
+              <p class="text-small leight-weight">Service Charge: N{{pricingDetails.serviceCharge | number}}</p>
+              <p class="text-small leight-weight">
+                Passenger 1 15kg Extra Baggage: N10,000
+              </p>
+            </div>
+          </div>
+          <div class="">
+            <div class="d-grid gap-3 mt-4">
+              <div class="p-3 rounded-10 text-center bg-light text-primal-blue">
+                <p class="text-small">Total Price</p>
+                <p class="primal-text-bold fw-bold mt-3">N{{pricingDetails.totalticketCost | number}}</p>
+              </div>
+              <button (click)="submitPassengerInformation();" type="button"
+                class="btn primal-border-info btn-lg text-white" data-bs-toggle="modal"
+                data-bs-target="#paymentOptionModal">
+                Make Payment
+              </button>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade make-payment-modal" id="paymentOptionModal" tabindex="-1"
+              aria-labelledby="paymentOptionModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content rounded-10">
+                  <div class="modal-header">
+                    <button type="button" class="
+                        btn-close
+                        primal-bg
+                        rounded-10
+                        text-white
+                        opacity-100
+                      " data-bs-dismiss="modal" aria-label="Close">
+                      <i class="bi bi-x-lg"></i>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <app-spinner *ngIf="isLoading && !bookingForm.value.recordLocator"></app-spinner>
+                    <div *ngIf="bookingForm.value.recordLocator">
+                      <p class="primal-text-bold primal-text-blue text-center">
+                        Reference: {{bookingForm.value.recordLocator}}
+                      </p>
+                      <p class="primal-text-bold primal-text-blue text-center">
+                        How would you like to pay?
+                      </p>
+                      <div class="
+                          col-8
+                          mx-auto
+                          d-grid
+                          gap-3
+                          payment-option-container
+                        ">
+                        <button (click)="payWithCash()" type="button"
+                          class="btn btn-light p-2 d-flex justify-content-center align-items-center rounded-10 pay-btn"
+                          data-bs-dismiss="modal">
+                          <mat-icon class="text-success me-2">payment</mat-icon><span>Pay Cash</span>
+                        </button>
+                        <button type="button" (click)="payLater()"
+                          class="btn btn-light p-2 d-flex justify-content-center align-items-center rounded-10 pay-btn"
+                          data-bs-dismiss="modal" aria-label="Close">
+                          <mat-icon class="text-info me-2">watch_later</mat-icon><span>Pay Later</span>
+                        </button>
+                        <button type="button" (click)="payWithPaystack($event)" class="btn btn-light p-2 rounded-10">
+                          <img src="assets/images/paystack.svg" alt="" />
+                        </button>
+                        <button type="button" class="btn btn-light p-2 rounded-10">
+                          <img src="assets/images/interswitch.svg" alt="" />
+                        </button>
+                        <button type="button" class="btn btn-light p-2 rounded-10">
+                          <img src="assets/images/rave.svg" alt="" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="modal-footer"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<!-- Modify Flight Search Modal -->
+<!-- Modal -->
+<div class="modal fade" id="modifysearchModal" tabindex="-1" aria-labelledby="modifysearchModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modifysearchModalLabel">
+          Edit flight search criteria
+        </h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-flight-search></app-flight-search>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn text-white primal-bg">
+          Save changes
+        </button>
+      </div> -->
+    </div>
+  </div>
+</div>
+<!-- Modify Flight Search Modal End-->

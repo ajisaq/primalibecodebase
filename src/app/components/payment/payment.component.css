@@ -1,0 +1,26 @@
+.booking-stepper .mat-step-header .mat-step-icon {
+  background-color: #fff;
+  color: #fff;
+  border: 1px solid var(--primal-blue);
+}
+
+.booking-stepper .mat-step-header .mat-step-icon-selected,
+.booking-stepper .mat-step-header .mat-step-icon-state-done,
+.booking-stepper .mat-step-header .mat-step-icon-state-edit {
+  background-color: #070d2d;
+  color: #fff;
+}
+
+.booking-stepper .mat-stepper-horizontal-line {
+  border-top-color: transparent;
+}
+
+.mat-horizontal-content-container {
+  padding: 5px !important;
+}
+
+@media screen and (min-width: 768px) {
+  .mat-horizontal-content-container {
+    padding: 10px !important;
+  }
+}

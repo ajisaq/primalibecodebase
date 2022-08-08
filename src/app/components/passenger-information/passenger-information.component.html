@@ -1,0 +1,361 @@
+<form [formGroup]="passengersInformationForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="row gy-4">
+    <div formArrayName="adult" *ngFor="let AD of passengersInformationForm.get('adult').controls; let i = index"
+      class="col-12 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title primal-text-bold primal-text-blue my-2">
+
+            Passenger Information (Adult)
+          </h5>
+          <div [formGroupName]="i" class="row">
+            <div class="col-12 d-flex my-3">
+              <div class="ms-3">
+                <label>
+                  <input type="radio" value="Mr" [id]="'gender'+i" (change)="setPassengerGender($event, i)"
+                    class="option-input radio" formControlName="title" />
+                  Mr
+                </label>
+              </div>
+              <div class="ms-3">
+                <label>
+                  <input type="radio" value="Mrs" [id]="'gender'+i" (change)="setPassengerGender($event, i)"
+                    class="option-input radio" formControlName="title" />
+                  Mrs
+                </label>
+              </div>
+              <div class="ms-3">
+                <label>
+                  <input type="radio" value="Miss" [id]="'gender'+i" (change)="setPassengerGender($event, i)"
+                    class="option-input radio" formControlName="title" />
+                  Miss
+                </label>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 mb-3">
+              <div class="d-flex align-items-center input-wrapper position-relative">
+                <span class="me-3"><img src="assets/icons/passenger.svg" alt="" /></span>
+                <input type="text" class="" placeholder="FIRST NAME" formControlName="firstName" />
+              </div>
+            </div>
+            <div class="col-12 col-md-6 mb-3">
+              <div class="d-flex align-items-center input-wrapper position-relative">
+                <span class="me-3"><img src="assets/icons/passenger.svg" alt="" /></span>
+                <input type="text" class="" placeholder="LAST NAME" formControlName="lastName" />
+              </div>
+            </div>
+            <!-- <div class="col-12 col-md-6 mb-3">
+              <div class="d-flex align-items-center input-wrapper position-relative">
+                <span class="me-3"><img src="assets/icons/calender2.svg" alt="" /></span>
+                <input type="date" placeholder="Date Of Birth" formControlName="dateOfBirth" />
+              </div>
+            </div> -->
+            <div class="col-12 col-md-6 mb-3">
+              <div class="d-flex align-items-center input-wrapper position-relative">
+                <span class="me-3"><img src="assets/icons/phone.svg" alt="" /></span>
+                <input type="text" placeholder="Phone" formControlName="phone" />
+              </div>
+            </div>
+            <div class="col-12 col-md-6 mb-3">
+              <div class="d-flex align-items-center input-wrapper position-relative">
+                <span class="me-3"><img src="assets/icons/envelope.svg" alt="" /></span>
+                <input type="text" placeholder="Email Address" formControlName="email" />
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="col-6 mb-3">
+                <div class="d-flex align-items-center px-3 add-service-btn-wrapper">
+                  <span class="primal-text-blue">Added Service(s)</span>
+                  <span class="ms-2"><i class="bi bi-briefcase"></i> </span>15kg
+                </div>
+              </div>
+            </div>
+            <div class="col-12 mb-3">
+              <div class="
+                    d-flex
+                    align-items-center
+                    justify-content-between
+                    px-3
+                    add-service-btn-wrapper
+                  ">
+                <span class="primal-text-bold primal-text-blue">Add Service(s)</span>
+                <button type="button" role="button" class="btn text-white add-service-btn" attr.data-bs-toggle="modal"
+                  attr.data-bs-target="#addServiceModal">
+                  <i class="bi bi-plus-lg"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div formArrayName="child" *ngFor="let CH of passengersInformationForm.get('child').controls; let i = index"
+      class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title primal-text-bold primal-text-blue my-2">
+            Passenger Information (Child)
+          </h5>
+          <div [formGroupName]="i" class="row">
+            <div class="col-12 col-md-6 mb-3">
+              <div class="d-flex align-items-center input-wrapper position-relative">
+                <span class="me-3"><img src="assets/icons/passenger.svg" alt="" /></span>
+                <input type="text" class="" placeholder="FIRST NAME" formControlName="firstName" />
+              </div>
+            </div>
+            <div class="col-12 col-md-6 mb-3">
+              <div class="d-flex align-items-center input-wrapper position-relative">
+                <span class="me-3"><img src="assets/icons/passenger.svg" alt="" /></span>
+                <input type="text" class="" placeholder="LAST NAME" formControlName="lastName" />
+              </div>
+            </div>
+            <div class="col-12 mb-3">
+              <div class="d-flex align-items-center input-wrapper position-relative">
+                <span class="me-3"><img src="assets/icons/calender2.svg" alt="" /></span>
+                <input type="date" placeholder="Date Of Birth" formControlName="dateOfBirth" />
+              </div>
+            </div>
+            <!-- <div class="col-12 col-md-6 mb-3">
+              <div class="d-flex align-items-center input-wrapper position-relative">
+                <span class="me-3"><img src="assets/icons/phone.svg" alt="" /></span>
+                <input type="text" placeholder="Phone" formControlName="phone" />
+              </div>
+            </div> -->
+
+            <div class="col-12">
+              <div class="col-6 mb-3">
+                <div class="d-flex align-items-center px-3 add-service-btn-wrapper">
+                  <span class="primal-text-blue">Added Service(s)</span>
+                  <span class="ms-2"><i class="bi bi-briefcase"></i> </span>15kg
+                </div>
+              </div>
+            </div>
+            <div class="col-12 mb-3">
+              <div class="d-flex align-items-center justify-content-between px-3 add-service-btn-wrapper">
+                <span class="primal-text-bold primal-text-blue">Add Service(s)</span>
+                <button type="button" role="button" class="btn text-white add-service-btn">
+                  <i class="bi bi-plus-lg"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div formArrayName="infant" *ngFor="let IN of passengersInformationForm.get('infant').controls; let i = index"
+      class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title primal-text-bold primal-text-blue my-2">
+            Passenger Information (Infant)
+          </h5>
+          <div [formGroupName]="i" class="row">
+            <div class="col-12 col-md-6 mb-3">
+              <div class="d-flex align-items-center input-wrapper position-relative">
+                <span class="me-3"><img src="assets/icons/passenger.svg" alt="" /></span>
+                <input type="text" class="" placeholder="FIRST NAME" formControlName="firstName" />
+              </div>
+            </div>
+            <div class="col-12 col-md-6 mb-3">
+              <div class="d-flex align-items-center input-wrapper position-relative">
+                <span class="me-3"><img src="assets/icons/passenger.svg" alt="" /></span>
+                <input type="text" class="" placeholder="LAST NAME" formControlName="lastName" />
+              </div>
+            </div>
+            <div class="col-12 mb-3">
+              <div class="d-flex align-items-center input-wrapper position-relative">
+                <span class="me-3"><img src="assets/icons/calender2.svg" alt="" /></span>
+                <input type="date" placeholder="Date Of Birth" formControlName="dateOfBirth" />
+              </div>
+            </div>
+            <!-- <div class="col-12 col-md-6 mb-3">
+              <div class="d-flex align-items-center input-wrapper position-relative">
+                <span class="me-3"><img src="assets/icons/phone.svg" alt="" /></span>
+                <input type="text" placeholder="Phone" formControlName="phone" />
+              </div>
+            </div> -->
+            <div class="col-12">
+              <div class="col-6 mb-3">
+                <div class="d-flex align-items-center px-3 add-service-btn-wrapper">
+                  <span class="primal-text-blue">Added Service(s)</span>
+                  <span class="ms-2"><i class="bi bi-briefcase"></i> </span>15kg
+                </div>
+              </div>
+            </div>
+            <div class="col-12 mb-3">
+              <div class="d-flex align-items-center justify-content-between px-3 add-service-btn-wrapper">
+                <span class="primal-text-bold primal-text-blue">Add Service(s)</span>
+                <button type="button" role="button" class="btn text-white add-service-btn">
+                  <i class="bi bi-plus-lg"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title primal-text-bold primal-text-blue my-2">
+            Contact Details
+          </h5>
+          <div class="row">
+            <div class="col-12 my-4">
+              <label>
+                <input type="radio" class="option-input radio" name="passenger_title" />
+                Same as first passenger.
+              </label>
+            </div>
+            <div class="col-12 col-md-6 mb-3">
+              <div class="d-flex align-items-center input-wrapper">
+                <span class="me-3"><img src="assets/icons/phone.svg" alt="" /></span>
+                <div class="d-flex flex-column">
+                  <label class="text-small light-weight" for="">PHONE NUMBER</label>
+                  <input type="text" />
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 mb-3">
+              <div class="d-flex align-items-center input-wrapper">
+                <span class="me-3"><img src="assets/icons/envelope.svg" alt="" /></span>
+                <div class="d-flex flex-column">
+                  <label class="text-small light-weight" for="">EMAIL ADDRESS</label>
+                  <input type="text" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</form>
+
+<!-- Modal -->
+<div class="modal fade" id="addServiceModal" tabindex="-1" aria-labelledby="addServiceModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="
+          add-service-modal-header
+          p-3
+          d-flex
+          flex-column
+          justify-content-start
+        ">
+        <h4 class="modal-title fw-bold" id="addServiceModalLabel">
+          Add Services(s)
+        </h4>
+        <span class="text-small light-weight">What service would you like to add to make your trip more
+          comfortable?</span>
+      </div>
+      <div class="modal-body">
+        <div class="accordion" id="accordionFlushExample">
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="flush-headingOne">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                Extra Baggage
+              </button>
+            </h3>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+              data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                <div class="row">
+                  <div class="col-4">
+                    <div class="
+                        card
+                        p-3
+                        extra-baggage-item
+                        d-flex
+                        flex-column
+                        justify-content-between
+                        align-items-center
+                      ">
+                      <img src="assets/icons/briefecase.svg" alt="" />
+                      <p class="my-3">+10kg</p>
+                      <button class="btn primal-border-info rounded-10 px-3 btn-sm">
+                        Select
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="
+                        card
+                        p-3
+                        extra-baggage-item
+                        d-flex
+                        flex-column
+                        justify-content-between
+                        align-items-center
+                      ">
+                      <img src="assets/icons/briefecase.svg" alt="" />
+                      <p class="my-3">+15kg</p>
+                      <button class="btn primal-border-info rounded-10 px-3 btn-sm">
+                        Select
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="
+                        card
+                        p-3
+                        extra-baggage-item
+                        d-flex
+                        flex-column
+                        justify-content-between
+                        align-items-center
+                      ">
+                      <img src="assets/icons/briefecase.svg" alt="" />
+                      <p class="my-3">+20kg</p>
+                      <button class="btn primal-border-info rounded-10 px-3 btn-sm">
+                        Select
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="flush-headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                Fast Track
+              </button>
+            </h3>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+              data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                <p class="h2">Fast Track Products go here</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="flush-headingThree">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                Premium Lounge
+              </button>
+            </h3>
+            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+              data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                <p class="h2">Premium Lounge Products go here</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-start">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button type="button" class="btn primal-bg text-white">
+          Add Services
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Ends -->

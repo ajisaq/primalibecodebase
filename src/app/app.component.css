@@ -1,0 +1,14 @@
+.app-body {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+@media screen and (max-width: 404px) {
+  img {
+    width: 29.98px !important;
+    height: 24.49px !important;
+  }
+  .nav-link {
+    font-size: 18px;
+  }
+}

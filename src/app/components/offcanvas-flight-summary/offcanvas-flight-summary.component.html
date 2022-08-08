@@ -1,0 +1,116 @@
+<div class="row p-4 d-flex justify-content-between">
+    <div *ngFor="let flightDetail of flightSummaryDetails; let i=index;" class="col-sm-6 col-lg-3">
+        <h4 *ngIf="flightSummaryDetails.length > 2 || i != 1" class="mb-3 h4">Outbound</h4>
+        <h4 *ngIf="flightSummaryDetails.length == 2 && i == 1" class="mb-3 h4">Inbound</h4>
+        <div class="col d-flex align-items-baseline">
+            <p class="primal-text-bold">{{flightSummaryDetails[i]?.etd}}</p>
+            <p class="ms-2 light-weight">{{flightSummaryDetails[i]?.dapartCity}}</p>
+            <div class="d-flex mx-2 align-items-center">
+                <span class="circle"></span>
+                <span class="line"></span>
+                <span class="circle"></span>
+            </div>
+            <p class="primal-text-bold fw-bold">{{flightSummaryDetails[i]?.eta}}</p>
+            <p class="ms-2 light-weight">{{flightSummaryDetails[i]?.arriveCity}}</p>
+        </div>
+        <div class="col" style="line-height: 3px">
+            <p>
+                <span class="light-weight text-small">Flight: {{flightSummaryDetails[i]?.flightNumber}}
+                    <span class="primal-info-color">|</span>
+                    {{flightSummaryDetails[i]?.dapartDate}}</span>
+            </p>
+            <p>
+                <span class="light-weight text-small">Cabin Class: {{flightSummaryDetails[i]?.cabinClass}} <span
+                        class="primal-info-color">|</span>
+                    Booking
+                    Class: {{flightSummaryDetails[i]?.bookingClass | uppercase}}</span>
+            </p>
+        </div>
+    </div>
+    <!-- <div *ngIf="flightSummaryDetails.length > 1" class="col-sm-6 col-lg-3">
+        <h4 class="mb-3 h4">Inbound</h4>
+        <div class="col d-flex align-items-baseline">
+            <p class="primal-text-bold">{{flightSummaryDetails[1]?.etd}}</p>
+            <p class="ms-2 light-weight">{{flightSummaryDetails[1]?.dapartCity}}</p>
+            <div class="d-flex mx-2 align-items-center">
+                <span class="circle"></span>
+                <span class="line"></span>
+                <span class="circle"></span>
+            </div>
+            <p class="primal-text-bold fw-bold">{{flightSummaryDetails[1]?.eta}}</p>
+            <p class="ms-2 light-weight">{{flightSummaryDetails[1]?.arriveCity}}</p>
+        </div>
+        <div class="col" style="line-height: 3px">
+            <p>
+                <span class="light-weight text-small">Flight: {{flightSummaryDetails[1]?.flightNumber}}
+                    <span class="primal-info-color">|</span>
+                    {{flightSummaryDetails[1]?.dapartDate}}</span>
+            </p>
+            <p>
+                <span class="light-weight text-small">Cabin Class: {{flightSummaryDetails[1]?.cabinClass}} <span
+                        class="primal-info-color">|</span>
+                    Booking
+                    Class: {{flightSummaryDetails[1]?.bookingClass | uppercase}}</span>
+            </p>
+        </div>
+    </div> -->
+    <div class="col-sm-6 col-lg-3">
+        <div class="col-12" style="line-height: 5px">
+            <h4 class="primal-text-bold" *ngIf="!changeFlightDate" >Pricing Details</h4>
+            <h4 class="primal-text-bold" *ngIf="changeFlightDate">Previous Booking Fare</h4>
+            <p class="text-small leight-weight">
+                Ticket Cost: N{{pricingDetails.ticketCost | number }}
+            </p>
+            <p class="text-small leight-weight">
+                Total Tax Amount: N{{pricingDetails.totalTaxAmount | number}}
+            </p>
+            <p class="text-small leight-weight">
+                Total Surcharge: N{{pricingDetails.totalSurcharge | number}}
+            </p>
+            <p class="text-small leight-weight">
+                Service Charge: N{{pricingDetails.serviceCharge | number}}
+            </p>
+            <p class="text-small leight-weight">
+                Total Price: <span class="h3 fw-bold"><strong>N{{pricingDetails.totalticketCost |
+                        number}}</strong></span>
+            </p>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-3" *ngIf="changeFlightDate">
+        <div class="col-12" style="line-height: 5px">
+            <h4 class="primal-text-bold">New Booking Fare</h4>
+            <p class="text-small leight-weight">
+                New Ticket Cost: N{{pricingDetails.ticketCost | number }}
+            </p>
+            <p class="text-small leight-weight">
+                Tax : N{{pricingDetails.totalTaxAmount | number}}
+            </p>
+            <p class="text-small leight-weight">
+                Surcharge: N{{pricingDetails.totalSurcharge | number}}
+            </p>
+            <p class="text-small leight-weight">
+                Service Charge: N{{pricingDetails.serviceCharge | number}}
+            </p>
+            <p class="text-small leight-weight">
+                Total Price: <span class="h3 fw-bold"><strong>N{{pricingDetails.totalticketCost |
+                        number}}</strong></span>
+            </p>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-3 d-none d-lg-flex justify-content-end">
+        <a role="button" type="submit" mat-button matStepperNext (click)="openLink($event)"
+            class="btn border rounded-end border-white offcanvas-continue-btn">
+            Contiue
+        </a>
+    </div>
+</div>
+
+<div class="col-12 mt-3 d-lg-none">
+    <div class="d-grid gap-2">
+        <a role="button" type="submit" mat-button matStepperNext (click)="openLink($event)"
+            class="btn primal-bg-info btn-lg rounded-10">
+            Continue
+        </a>
+    </div>
+</div>

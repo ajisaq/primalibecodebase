@@ -1,0 +1,14 @@
+.home {
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  background-image: url("src/assets/images/primalibe-home-bg.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media screen and (max-width: 1029px) {
+  .nav-link {
+    font-size: 12px;
+  }
+}

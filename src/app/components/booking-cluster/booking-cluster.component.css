@@ -1,0 +1,43 @@
+.body {
+  background-color: #e5e5e5;
+  color: var(--primal-blue);
+  width: 100vw;
+  height: 100vh;
+  line-height: 25.2px;
+}
+
+.card {
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.flight-time {
+  font-size: 18px;
+  font-weight: normal;
+  color: var(--primal-blue);
+}
+.state-code {
+  font-size: 32px;
+}
+.state-name {
+  font-size: 12px;
+}
+
+.seats-left {
+  margin-top: -5px;
+}
+
+.class-price-container {
+  border-radius: 10px;
+}
+
+.price-economy-bg {
+  border: 2px solid #2196f3;
+  background-color: rgba(33, 150, 243, 0.1);
+}
+
+.price-business-bg {
+  background: rgba(171, 104, 201, 0.1);
+  border: 2px solid #ab68c9;
+}

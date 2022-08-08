@@ -1,0 +1,273 @@
+a {
+  text-decoration: none;
+  color: var(--primal-blue);
+}
+.schedule-slider {
+  position: relative;
+}
+
+.slider-wrap {
+  height: 89px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  border: none;
+}
+
+.slider-main {
+  position: absolute;
+  width: 200%;
+}
+
+.item {
+  position: relative;
+  display: inline-block;
+  /* width: 123px; */
+  height: 100%;
+  background-color: #ffffff;
+  border: none;
+}
+
+.schedule {
+  padding: 8px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.btn-area button {
+  position: absolute;
+  border: none;
+  background-color: transparent;
+}
+
+.prev {
+  left: 15px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.next {
+  right: -3px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.item.selected {
+  background-color: var(--primal-blue);
+  color: #ffffff;
+}
+
+.item:hover,
+.item:focus,
+.item:active {
+  background-color: var(--primal-blue);
+  color: #ffffff;
+}
+
+/*############# N E W   S L I D E R    C S S ####################*/
+
+.slider-outer-container {
+  width: 110%;
+  overflow: hidden;
+}
+
+.slider-wrapper {
+  font-size: 18px;
+  width: 100%;
+  margin: auto;
+  height: 82px;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.slider-container {
+  height: 82px;
+}
+
+.slider-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  text-align: center;
+  position: static;
+  width: calc(100% / 3);
+  height: 82px;
+  left: 130px;
+  top: 0px;
+  background-color: #ffffff;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+  margin: 0px 0px;
+}
+
+.slider-item.selected {
+  background-color: var(--primal-blue);
+  color: #ffffff;
+}
+
+.slider-item:hover,
+.slider-item:focus,
+.slider-item:active {
+  background-color: var(--primal-blue);
+  color: #ffffff;
+}
+
+.slider-ctrls {
+  z-index: 100;
+}
+
+.slider-ctrl-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+  /* width: 60px;
+  height: 79px; */
+  top: 1.5px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 0px 10px;
+}
+
+.next-btn {
+  right: -38px;
+  top: 41px;
+  transform: translate(-50%, -50%);
+  border-radius: 0px 15px 15px 0px;
+  border: none;
+  background-color: transparent;
+}
+
+.prev-btn {
+  left: -18px;
+  top: 22px;
+  border-radius: 15px 0px 0px 15px;
+  border: none;
+  background-color: transparent;
+}
+
+/* ################# N E W   S L I D E R    C S S   E N D ################*/
+
+/* ################# M E D I A      Q U E R I E S ################*/
+
+@media screen and (min-width: 990px) {
+  .item {
+    position: relative;
+    display: inline-block;
+    height: 100%;
+    background-color: #ffffff;
+    border: none;
+  }
+
+  .slider-wrap {
+    background-color: transparent !important;
+    border-radius: 0;
+  }
+
+  .btn-area button.prev,
+  .btn-area button.next {
+    background-color: #ffffff !important;
+    height: 89px;
+  }
+
+  .prev {
+    border-radius: 15px 0 0 15px;
+  }
+
+  .next {
+    border-radius: 0 15px 15px 0;
+  }
+
+  /* N E W   S L I D E R    C S S */
+
+  .slider-wrapper {
+    width: 1023px;
+    overflow: hidden;
+    margin: auto;
+    border-radius: 0;
+  }
+
+  .slider-container {
+    height: 82px;
+  }
+
+  .slider-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 10px 20px;
+    cursor: pointer;
+    position: static;
+    width: 129px;
+    height: 82px;
+    left: 70px;
+    top: 0px;
+    background: #ffffff;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 0px 10px;
+  }
+
+  .slider-item.selected {
+    background-color: var(--primal-blue);
+    color: #ffffff;
+  }
+
+  .slider-item:hover,
+  .slider-item:focus,
+  .slider-item:active {
+    background-color: var(--primal-blue);
+    color: #ffffff;
+  }
+
+  .slider-ctrls {
+    z-index: 100;
+  }
+
+  .slider-ctrl-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+
+    width: 60px;
+    height: 79px;
+    top: 1.5px;
+
+    /* White */
+
+    background: #ffffff;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0px 10px;
+  }
+
+  .next-btn {
+    right: -33px;
+    top: 41px;
+    transform: translate(-50%, -50%);
+    border-radius: 0px 15px 15px 0px;
+  }
+
+  .prev-btn {
+    border-radius: 15px 0px 0px 15px;
+  }
+
+  /* N E W   S L I D E R    C S S */
+}

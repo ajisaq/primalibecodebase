@@ -1,0 +1,186 @@
+<form [formGroup]="flightSearchForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="row">
+    <!-- <div class="col-12 d-flex my-3">
+      <div class="ms-3">
+        <label>
+          <input
+            type="radio"
+            class="option-input radio"
+            name="trip_type"
+            checked
+          />
+          One Way
+        </label>
+      </div>
+      <div class="ms-3">
+        <label>
+          <input type="radio" class="option-input radio" name="trip_type" />
+          Round Trip
+        </label>
+      </div>
+    </div> -->
+    <div class="col-12 col-md-5 mb-3">
+      <div class="d-flex align-items-center input-wrapper position-relative">
+        <label class="text-small light-weight text-input-hint" for=""
+          >{{ flightSearchForm.value.tripType }} Where are you flying
+          from?</label
+        >
+        <span class="me-3"
+          ><img src="assets/icons/plane-take-off.svg" alt=""
+        /></span>
+        <input
+          hidden
+          type="text"
+          formControlName="origin"
+          placeholder="Origin"
+        />
+        <input
+          type="text"
+          placeholder="Origin"
+          aria-label="Number"
+          matInput
+          [formControl]="originControl"
+          [matAutocomplete]="originAutoDropdown"
+        />
+        <mat-autocomplete
+          autoActiveFirstOption
+          #originAutoDropdown="matAutocomplete"
+          (optionSelected)="selectedOrigin($event)"
+        >
+          <mat-option
+            *ngFor="let option of filteredOriginOptions | async"
+            [value]="option.extra"
+          >
+            {{ option.extra.city.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </div>
+    </div>
+    <div class="d-none col-md-2 d-md-flex input-wrapper-rounded">
+      <i class="bi bi-arrow-left-right"></i>
+    </div>
+    <div class="col-12 col-md-5 mb-3">
+      <div class="d-flex align-items-center input-wrapper position-relative">
+        <label class="text-small light-weight text-input-hint" for=""
+          >Where are you flying to?</label
+        >
+        <span class="me-3"
+          ><img src="assets/icons/plane-land.svg" alt=""
+        /></span>
+        <input
+          hidden
+          type="text"
+          formControlName="destination"
+          placeholder="Destination"
+        />
+        <input
+          type="text"
+          placeholder="Destination"
+          aria-label="Number"
+          matInput
+          [formControl]="destinationControl"
+          [matAutocomplete]="destinationAutoDropdown"
+        />
+        <mat-autocomplete
+          autoActiveFirstOption
+          #destinationAutoDropdown="matAutocomplete"
+          (optionSelected)="selectedDestination($event)"
+        >
+          <mat-option
+            *ngFor="let option of filteredDestinationOptions | async"
+            [value]="option.extra"
+          >
+            {{ option.extra.city.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </div>
+    </div>
+    <div class="col-12 col-md-4 mb-3">
+      <div
+        class="d-flex align-items-center input-wrapper position-relative"
+        mat-button
+        [matMenuTriggerFor]="menu"
+      >
+        <label class="text-small light-weight text-input-hint" for=""
+          >Passengers</label
+        >
+        <span class="me-3"
+          ><img src="assets/icons/passenger.svg" alt=""
+        /></span>
+        <p
+          class="
+            text-small
+            light-weight
+            passenger-types
+            d-flex
+            justify-content-space-evenly
+          "
+        >
+          <span
+            class="text-small light-weight"
+            *ngIf="!flightSearchForm.get('passengers').valid"
+            >Click here to add Passengers
+          </span>
+          <span class="text-small light-weight" *ngIf="noAdult"
+            >{{ noAdult }}
+          </span>
+          <span class="text-small light-weight" *ngIf="noChild"
+            >{{ noChild }}
+          </span>
+          <span class="text-small light-weight" *ngIf="noInfant"
+            >{{ noInfant }}
+          </span>
+        </p>
+      </div>
+
+      <mat-menu #menu="matMenu">
+        <app-passenger-type-dropdown
+          (passengerNumbersFormValue)="
+            getPassengersFormDropDownFormValues($event)
+          "
+        ></app-passenger-type-dropdown>
+      </mat-menu>
+    </div>
+    <div class="col-12 col-md-4 mb-3">
+      <div class="d-flex align-items-center input-wrapper position-relative">
+        <label
+          class="text-small light-weight text-input-hint"
+          for="departureDate"
+          >Departure Date</label
+        >
+        <span class="me-3"
+          ><img src="assets/icons/calender2.svg" alt=""
+        /></span>
+        <input
+          type="date"
+          formControlName="departureDate"
+          placeholder="17th Nov 2021"
+        />
+      </div>
+    </div>
+    <div class="col-12 col-md-4 mb-3">
+      <div class="d-flex align-items-center input-wrapper position-relative">
+        <label class="text-small light-weight text-input-hint" for="returnDate"
+          >Return Date</label
+        >
+        <span class="me-3"
+          ><img src="assets/icons/calender2.svg" alt=""
+        /></span>
+        <input
+          type="date"
+          formControlName="returnDate"
+          placeholder="17th Nov 2021"
+        />
+      </div>
+    </div>
+    <div class="d-grid gap-2">
+      <button
+        [disabled]="!flightSearchForm.valid"
+        class="btn primal-bg text-white btn-lg"
+        type="submit"
+      >
+        Search Flight
+      </button>
+    </div>
+  </div>
+</form>

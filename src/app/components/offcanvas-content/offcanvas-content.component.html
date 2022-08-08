@@ -1,0 +1,54 @@
+<div class="position-relative">
+    <div class="col-12 text-center position-absolute modify-btn-float btn">
+        <div class="badge mb-3 p-2 m-auto" data-bs-toggle="modal" data-bs-target="#modifysearchModal">
+            <i class="bi bi-pencil-fill text-dark text-small"></i>
+            <span class="text-small text-dark"> Modify Search</span>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between p-3">
+        <p class="offcanvas-title text-center fw-bold mt-2" id="offcanvasBottomLabel">
+            Flight Summary
+        </p>
+        <button type="button" role="button" class="btn text-white only-icon-btn">
+            <i class="bi bi-chevron-up"></i>
+        </button>
+    </div>
+    <div class="offcanvas-body small">
+        <div class="d-flex flex-column summary-container">
+            <p class="text-small light-weight">Outbound</p>
+            <div class="col d-flex">
+                <p class="primal-text-bold">21:30</p>
+                <p class="ms-2 light-weight">Lagos</p>
+                <div class="d-flex mx-2 align-items-center">
+                    <span class="circle"></span>
+                    <span class="line"></span>
+                    <span class="circle"></span>
+                </div>
+                <p class="primal-text-bold">21:30</p>
+                <p class="ms-2 light-weight">Lagos</p>
+            </div>
+        </div>
+        <div class="mt-2 d-flex flex-column summary-container">
+            <p class="text-small light-weight">Outbound</p>
+            <!-- <p class="primal-text-bold mb-2">Not Selected</p> -->
+            <div class="col d-flex">
+                <p class="primal-text-bold">21:30</p>
+                <p class="ms-2 light-weight">Lagos</p>
+                <div class="d-flex mx-2 align-items-center">
+                    <span class="circle"></span>
+                    <span class="line"></span>
+                    <span class="circle"></span>
+                </div>
+                <p class="primal-text-bold">21:30</p>
+                <p class="ms-2 light-weight">Lagos</p>
+            </div>
+        </div>
+        <div class="col-12 mt-3">
+            <div class="d-grid gap-2">
+                <a routerLink="/payment" (click)="openLink($event)" class="btn primal-bg-info btn-lg rounded-10">
+                    Continue
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

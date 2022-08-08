@@ -1,0 +1,30 @@
+<div class="one-way position-relative">
+  <div class="badge btn rounded-pill p-2 mb-3 m-auto position-absolute top-0 end-0" (click)="openDialog()">
+    <i class="bi bi-pencil-fill text-dark text-small"></i>
+    <span class="text-small text-dark"> Modify Search</span>
+  </div>
+  <div *ngFor="let segment of getFlightSearchFormSegments().controls; let i=index" class="">
+    <div class="  search-outlet">
+      <h3 *ngIf="getFlightSearchFormSegments().controls.length > 2 || i != 1"
+        class="text-center text-md-start primal-text-blue primal-text-bold my-4">
+        Outbound {{indexedAirports['/api/airports/'+segment.value.origin]?.code}} -
+        {{indexedAirports['/api/airports/'+segment.value.destination]?.code}}
+      </h3>
+      <h3 *ngIf="getFlightSearchFormSegments().controls.length == 2 && i == 1"
+        class="text-center text-md-start primal-text-blue primal-text-bold my-4">
+        Inbound {{indexedAirports['/api/airports/'+segment.value.origin]?.code}} -
+        {{indexedAirports['/api/airports/'+segment.value.destination]?.code}}
+      </h3>
+      <div class="">
+        <app-schedule-carousel [selectedFlightDate]="this.flightSearchForm.getRawValue().segments[i]._chosenDay"
+          [segmentIndex]="i" [indexedFlightsByDate]="getSelectedDateRangeLowestPricesByDate(i)"
+          (onSelectedFlightDateChanged)="setSelectedDate($event, i)">
+        </app-schedule-carousel>
+      </div>
+      <app-booking-cluster *ngFor="let flight of getSelectedDateFlights(i); let j = index" [flight]="flight"
+        [segmentIndex]="i" [indexOfFlight]="j" [indexedAirports]="indexedAirports"></app-booking-cluster>
+      <app-booking-cluster *ngFor="let flight of getSelectedDateConnectingFlights(i); let j = index" [flight]="flight"
+        [isConnectingFlight]="true" [segmentIndex]="i" [indexOfFlight]="j" [indexedAirports]="indexedAirports"></app-booking-cluster>
+    </div>
+  </div>
+</div>

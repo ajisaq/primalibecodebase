@@ -1,0 +1,392 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <form [formGroup]="bookingForm">
+            <div fxHide class="tab-content p-24" fusePerfectScrollbar>
+
+                FORM FIELDS
+            </div>
+            <mat-tab-group [selectedIndex]="tabIndex" (selectedIndexChange)="tabIndex=$event">
+                <mat-tab label="Flight Search" [formGroup]="flightSearchForm">
+                    <div>
+                        ({{bookingLeg.flight.scheduleIri}})
+                        {{bookingLeg.flight.depart_airport.code}}-
+                        {{bookingLeg.flight.arrive_airport.code}}  : 
+                        {{bookingLeg.flight.departDate}}
+                        <!-- {{bookingLeg.flight | json}} -->
+                    </div>
+
+
+                    <!-- Segments Search Params -->
+                    <div fxFlex formArrayName="segments" class="mt-12">
+                        <div class="segment-search" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="4px"
+                            *ngFor="let segmentForm of flightSearchForm.get('segments')['controls'];let i = index" 
+                            [formGroupName]="i">
+
+
+
+                           <div class="row">
+          <div class="col-12 col-md-5 mb-3">
+            <div class="
+                d-flex
+                align-items-center
+                input-wrapper
+                position-relative
+              ">
+              <label class="text-small light-weight text-input-hint" for="">Where are you flying from?</label>
+              <span class="me-3"><img src="assets/icons/plane-take-off.svg" alt="" /></span>
+              <!-- <input hidden type="text" formControlName="origin" placeholder="Origin" /> -->
+              <input type="text" aria-label="Number" formControlName="origin"/>
+             
+            </div>
+          </div>
+          <div class="d-none  d-md-flex input-wrapper-rounded">
+            <i class="bi bi-arrow-left-right"></i>
+          </div>
+          <div class="col-12 col-md-5 mb-3">
+            <div class="
+                d-flex
+                align-items-center
+                input-wrapper
+                position-relative
+              ">
+              <label class="text-small light-weight text-input-hint" for="">Where are you flying to?</label>
+              <span class="me-3"><img src="assets/icons/plane-land.svg" alt="" /></span>
+              <!-- <input hidden type="text"  formControlName="destination" placeholder="Destination" /> -->
+              <input type="text" aria-label="Number" formControlName="destination" 
+                 />
+            </div>
+          </div>
+          
+          <div class="col-12 mb-3">
+            <div class="
+                d-flex
+                align-items-center
+                input-wrapper
+                position-relative
+              ">
+              <label class="text-small light-weight text-input-hint" for="departureDate">Departure Date</label>
+              <span class="me-3"><img src="assets/icons/calender2.svg" alt="" /></span>
+              <input type="date" formControlName="date" placeholder="17th Nov 2021" />
+            </div>
+          </div>
+          <div class="d-grid gap-2">
+            <button class="btn primal-bg text-white btn-lg" (click)="onSegmentSearch(flightSearchForm.get('segments')['controls'][0],0)">
+              Search Flight
+            </button>
+          </div>
+        </div>
+
+
+
+
+
+
+                           
+                            
+                            
+                        </div>
+                    </div>
+                    <!-- End Segment Search Params -->
+
+
+
+
+                    <!-- Search Result Starts -->
+                    <div class="main"
+                        style="
+                            background-color: white;
+                            height: 70%;
+                            min-height: 360px;
+                            padding: 10px;
+                            margin-bottom: 10px;
+                            overflow: auto;
+                            max-height: calc(calc((calc(100vh - 100px) / 9) * 7) / 100 * 70);"
+                    >
+
+                        <mat-tab-group backgroundColor="accent" [selectedIndex]="selectedSegment" (selectedIndexChange)="selectedSegment=$event">
+                            <mat-menu #menu="matMenu" >
+                                <ng-template matMenuContent let-segment="segment" let-flight="flight" let-cabinPrice="cabinPrice" let-clusterPrice="clusterPrice">
+                                <button mat-menu-item (click)="chooseFlight(segment,flight,cabinPrice,clusterPrice)">Add/Update PNR {{ segment+1 }}</button>
+                                <button mat-menu-item>cancel</button>
+                                </ng-template>
+                            </mat-menu>
+                            <!-- Starts -->
+                            <div>
+
+                                <!-- <flights-result *ngFor="let segmentForm of flightSearchForm.get('segments')['controls'];let j = index;" 
+                                    [flightSearchForm]="flightSearchForm"
+                                    [flightSearchState]="flightSearchState"
+                                    [availableFlights]="availableFlights"
+                                    >
+                                </flights-result> -->
+
+                                <mat-tab [fxHide]="true || flightSearchState[j] !== 2"
+                                *ngFor="let segmentForm of flightSearchForm.get('segments')['controls'];let j = index;" 
+                                label="SECTOR {{ j + 1 }} - {{ segmentForm.controls.origin.value? indexedAirports[segmentForm.controls.origin.value]:'x' | uppercase }} to {{ segmentForm.controls.destination.value? indexedAirports[segmentForm.controls.destination.value]:'x' | uppercase }}"
+                                style="height:80px!important; padding: 15px 0!important">
+
+
+                                    <div *ngIf="flightSearchState[j] == 0 && BookingLegsFormArray.controls.length == 0" fxLayout fxLayoutAlign="center center">
+                                        {{ flightSearchStates[flightSearchState[j]] }}
+                                    </div>
+                                    <div *ngIf="flightSearchState[j] == 1" fxLayout fxLayoutAlign="center center">
+                                        <mat-spinner></mat-spinner>
+                                    </div>
+
+                                    <app-one-way *ngIf="newSearchParams.origin" [flightSearchFormParams] = "newSearchParams"></app-one-way>
+
+                                    <ng-template #noFlightsFound>
+                                        <p>No PNR generated for this flight</p>
+                                    </ng-template>
+                                    
+                                </mat-tab>
+                            </div>
+                            <!-- Stop here -->
+                        </mat-tab-group>
+
+                    </div>
+                    <!-- End Search Result Starts -->
+
+
+                </mat-tab>
+                <mat-tab label="Confirm">
+                    
+                    <div>
+                        FROM : 
+                    </div>
+                    <!-- Flights in PNR -->
+                    <!-- <div *ngIf="BookingLegsFormArray.controls.length > 0"> -->
+                    <div>
+                        <div
+                            class="header"
+                            style="background-color: #039be5; padding: 8px; margin-top: 0px"
+                        >
+                            <h2 style="margin: 0px; font-weight: bold; color: white">
+                                FLIGHTS in PNR - {{ bookingForm.controls['recordLocator'].value || 'No PNR' | uppercase }}
+                                <!-- {{bookingForm.getRawValue() | json}} -->
+                            </h2>
+                        </div>
+                        <table>
+                            <tr>
+                                <th>Route</th>
+                                <th>Airport</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                                <th>Expire</th>
+                                <!-- <th>Actions</th> -->
+                            </tr>
+                            <!-- <tr *ngFor="let bookingLeg of BookingLegsFormArray.value; let i = index"> -->
+                                <td>
+                                    <p >
+                                        <span>{{ indexedAirports[bookingLeg.flight.depart_airport.id]?.code }}</span>
+                                        <br />
+                                        <span>{{ indexedAirports[bookingLeg.flight.arrive_airport.id]?.code }}</span>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        {{ indexedAirports[bookingLeg.flight.depart_airport.id]?.name }}
+                                    </p>
+                                    <p>
+                                        {{ indexedAirports[bookingLeg.flight.arrive_airport.id]?.name }}
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <span>{{ bookingLeg.flight.depart_date | date: "E MMM dd y" | uppercase }}</span>
+                                        <br />
+                                        <span>{{ bookingLeg.flight.arrive_date | date: "E MMM dd y" | uppercase }}</span>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                    <!--  | date: "hh:mm a"  -->
+                                        <span>{{ bookingLeg.flight.etd}}</span>
+                                        <br />
+                                        <span>{{ bookingLeg.flight.eta}}</span>
+                                    </p>
+                                </td>
+                                <td>
+                                    <div>
+                                        <div style="display: flex; align-items: center"
+                                            *ngIf="bookingLeg.flight.isActive; else flightInactive"
+                                        >
+                                            <p>Status:</p>
+                                            <mat-chip-list aria-label="Flight Status">
+                                                <mat-chip color="accent">Active</mat-chip>
+                                            </mat-chip-list>
+                                        </div>
+                                        <ng-template #flightInactive>
+                                            <div style="display: flex; align-items: center">
+                                                <!-- <p>Status:</p> -->
+                                                <mat-chip-list aria-label="Flight Status">
+                                                    <mat-chip color="warn">Inactive</mat-chip>
+                                                </mat-chip-list>
+                                            </div>
+                                        </ng-template>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div *ngIf="bookingLeg.expireAt" (click)="expireIn(bookingLeg.expireAt)">
+                                        {{ bookingLeg.expireAt | date:'d/MM/y HH:mm:s'}}
+                                    </div>
+                                </td>
+                                <!-- <th>
+                                    <button mat-raised-button color="primary" (click)="onChangeFlight(bookingLeg)">
+                                        <mat-icon>flight_takeoff</mat-icon> Change Flight
+                                    </button>
+                                    <button mat-raised-button color="warn" (click)="onCancelFlight(bookingLeg.id)">
+                                        <mat-icon>airplanemode_inactive</mat-icon> Cancel Flight
+                                    </button>
+                                </th> -->
+                            <!-- </tr> -->
+                        </table>
+                    </div>
+                    <!-- End Flights in PNR -->
+
+
+
+                    <br><br><br>
+                    <div>
+                        TO :
+                    </div>
+                    <!-- NEW Flight -->
+                    <!-- <div *ngIf="BookingLegsFormArray.controls.length > 0"> -->
+                        <div
+                            class="header"
+                            style="background-color: #039be5; padding: 8px; margin-top: 0px"
+                        >
+                            <h2 style="margin: 0px; font-weight: bold; color: white">
+                                New Flight Record
+                                <!-- {{bookingForm.getRawValue() | json}} -->
+                            </h2>
+                        </div>
+                        <table>
+                            <tr>
+                                <th>Route</th>
+                                <th>Airport</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                                <th>Expire</th>
+                                <!-- <th>Actions</th> -->
+                            </tr>
+                            <!-- <tr *ngFor="let bookingLeg of BookingLegsFormArray.value; let i = index"> -->
+                            <tr *ngIf="newBookingLeg">
+                                <td>
+                                    <p >
+                                        <span>{{ indexedAirports[newBookingLeg.value.flight.departAirport.iri]?.code }}</span>
+                                        <br />
+                                        <span>{{ indexedAirports[newBookingLeg.value.flight.arriveAirport.iri]?.code }}</span>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        {{ indexedAirports[newBookingLeg.value.flight.departAirport.iri]?.name }}
+                                    </p>
+                                    <p>
+                                        {{ indexedAirports[newBookingLeg.value.flight.arriveAirport.iri]?.name }}
+                                    </p>
+                                </td>
+                                <td>
+                                    <p >
+                                        <span>{{ newBookingLeg.value.flight.departDate | date: "E MMM dd y" | uppercase }}</span>
+                                        <br />
+                                        <span>{{ newBookingLeg.value.flight.arriveDate | date: "E MMM dd y" | uppercase }}</span>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p >
+                                    <!--  | date: "hh:mm a"  -->
+                                        <span>{{ newBookingLeg.value.flight.etd}}</span>
+                                        <br />
+                                        <span>{{ newBookingLeg.value.flight.eta}}</span>
+                                    </p>
+                                </td>
+                                <td>
+                                    <div >
+                                        <div style="display: flex; align-items: center"
+                                            *ngIf="newBookingLeg.value.flight.isActive; else flightInactive"
+                                        >
+                                            <p>Status:</p>
+                                            <mat-chip-list aria-label="Flight Status">
+                                                <mat-chip color="accent">Active</mat-chip>
+                                            </mat-chip-list>
+                                        </div>
+                                        <ng-template #flightInactive>
+                                            <div style="display: flex; align-items: center">
+                                                <!-- <p>Status:</p> -->
+                                                <mat-chip-list aria-label="Flight Status">
+                                                    <mat-chip color="warn">Inactive</mat-chip>
+                                                </mat-chip-list>
+                                            </div>
+                                        </ng-template>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div *ngIf="newBookingLeg.value.expireAt" (click)="expireIn(newBookingLeg.value.expireAt)">
+                                        {{ newBookingLeg.value.expireAt | date:'d/MM/y HH:mm:s'}}
+                                    </div>
+                                </td>
+                                <!-- <th>
+                                    <button mat-raised-button color="primary" (click)="onChangeFlight(newBookingLeg.value)">
+                                        <mat-icon>flight_takeoff</mat-icon> Change Flight
+                                    </button>
+                                    <button mat-raised-button color="warn" (click)="onCancelFlight(newBookingLeg.value.id)">
+                                        <mat-icon>airplanemode_inactive</mat-icon> Cancel Flight
+                                    </button>
+                                </th> -->
+                            </tr>
+                        </table>
+                    <!-- </div> -->
+                    <!-- End NEW Flight -->
+
+
+
+                    <br><br><br>
+
+                    <div *ngIf="newBookingLeg" fxLayoutAlign="end end">
+                        <button mat-raised-button
+                                color="primary"
+                                class="save-button"
+                                (click)="onChangeFlightClicked()"
+                                [disabled]="newBookingLeg.invalid"
+                                aria-label="SAVE">
+                            CONFIRM CHANGE FLIGHT
+                        </button>
+                    </div>
+
+                </mat-tab>
+              </mat-tab-group>
+                
+            <!-- <div class="row">
+                <p>{{ bookingForm.getRawValue() | json }}</p>
+            </div> -->
+
+        </form>
+
+    </div>
+
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+
+        <button mat-button
+                class="cancel-button"
+                (click)="matDialogRef.close()"
+                aria-label="CANCEL">
+            CANCEL
+        </button>
+
+    </div>
+</div>

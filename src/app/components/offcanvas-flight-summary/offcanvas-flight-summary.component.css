@@ -1,0 +1,43 @@
+h4 {
+  font-size: 20px;
+}
+
+.summary-card p {
+  line-height: 3px !important;
+}
+
+.vertical-line {
+  width: 0;
+  height: 30px !important;
+  border: 1px solid #8db7ff;
+  position: relative;
+  left: 0.35rem;
+}
+
+.duration-container {
+  width: 10px;
+}
+
+.modal-content {
+  background-color: #e5e5e5;
+}
+
+.modal-header {
+  border-bottom: none;
+}
+
+.payment-option-container button {
+  border: 3px solid #8db7ff;
+}
+
+.offcanvas-continue-btn {
+  height: 116px;
+  width: 110px;
+  border-radius: 0px 10px 10px 0px;
+  color: #fff;
+}
+
+.offcanvas-continue-btn:hover {
+  background-color: #8db7ff;
+  color: #ffffff;
+}

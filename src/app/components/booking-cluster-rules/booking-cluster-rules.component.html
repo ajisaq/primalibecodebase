@@ -1,0 +1,273 @@
+<!-- <div class="col-12 mx-auto mt-3 collapse" id="collapseExample">
+  <div class="card card-body text-center">
+    <div class="badge btn rounded-pill p-2 mb-3 m-auto" data-bs-toggle="modal" data-bs-target="#modifysearchModal">
+      <i class="bi bi-pencil-fill text-dark text-small"></i>
+      <span class="text-small text-dark"> Modify Search</span>
+    </div>
+    <div class="text-center">
+      <p class="pb-2 text-center border-bottom border-info border-2">
+        Economy Flex
+      </p>
+      <p class="h2 primal-text-bold text-center">N28,500</p>
+      <p class="text-danger text-center">3 Seats left</p>
+      <button (click)="openBottomSheet()" type="button" class="btn mb-4 primal-bg">
+        Select
+      </button>
+    </div>
+    <div class="offcanvas offcanvas-bottom primal-bg" tabindex="-1" id="offcanvasBottom"
+      aria-labelledby="offcanvasBottomLabel">
+      <div class="col-12 text-center position-absolute modify-btn-float btn">
+        <div class="badge mb-3 p-2 m-auto" data-bs-toggle="modal" data-bs-target="#modifysearchModal">
+          <i class="bi bi-pencil-fill text-dark text-small"></i>
+          <span class="text-small text-dark"> Modify Search</span>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between p-3">
+        <p class="offcanvas-title text-center fw-bold mt-2" id="offcanvasBottomLabel">
+          Flight Summary
+        </p>
+        <button type="button" role="button" class="btn text-white only-icon-btn">
+          <i class="bi bi-chevron-up"></i>
+        </button>
+      </div>
+      <div class="offcanvas-body small">
+        <div class="d-flex flex-column summary-container">
+          <p class="text-small light-weight">Outbound</p>
+          <div class="col d-flex">
+            <p class="primal-text-bold">21:30</p>
+            <p class="ms-2 light-weight">Lagos</p>
+            <div class="d-flex mx-2 align-items-center">
+              <span class="circle"></span>
+              <span class="line"></span>
+              <span class="circle"></span>
+            </div>
+            <p class="primal-text-bold">21:30</p>
+            <p class="ms-2 light-weight">Lagos</p>
+          </div>
+        </div>
+        <div class="mt-2 d-flex flex-column summary-container">
+          <p class="text-small light-weight">Outbound</p>
+          <div class="col d-flex">
+            <p class="primal-text-bold">21:30</p>
+            <p class="ms-2 light-weight">Lagos</p>
+            <div class="d-flex mx-2 align-items-center">
+              <span class="circle"></span>
+              <span class="line"></span>
+              <span class="circle"></span>
+            </div>
+            <p class="primal-text-bold">21:30</p>
+            <p class="ms-2 light-weight">Lagos</p>
+          </div>
+        </div>
+        <div class="col-12 mt-3">
+          <div class="d-grid gap-2">
+            <button
+              routerLink="/payment"
+              class="btn primal-bg-info btn-lg rounded-10"
+              type="button"
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cluster-rules">
+      <div class="cluster-rules-item d-flex align-items-baseline">
+        <span class="me-2 icon">
+          <img src="assets/icons/ticket.svg" alt="" />
+        </span>
+        <p class="lh-1 text-small">
+          Fully Changeable Ticket (fare difference and change fee may apply)
+        </p>
+      </div>
+      <div class="cluster-rules-item d-flex align-items-baseline">
+        <span class="me-2 icon">
+          <img src="assets/icons/baggage.svg" alt="" />
+        </span>
+        <p class="lh-1 text-small">Baggage Allowance 20 Kg</p>
+      </div>
+      <div class="cluster-rules-item d-flex align-items-baseline">
+        <span class="me-2 icon">
+          <img src="assets/icons/hand-luggage.svg" alt="" />
+        </span>
+        <p class="lh-1 text-small">
+          Hand Luggage Allowance is one piece 8KG ( 45 cm x 35 cm x 20 cm)
+        </p>
+      </div>
+      <div class="cluster-rules-item d-flex align-items-baseline">
+        <span class="me-2 icon">
+          <img src="assets/icons/no-show-fee.svg" alt="" />
+        </span>
+        <p class="lh-1 text-small">No show fee may apply</p>
+      </div>
+      <div class="cluster-rules-item d-flex align-items-baseline">
+        <span class="me-2 icon">
+          <img src="assets/icons/calender.svg" alt="" />
+        </span>
+        <p class="lh-1 text-small">
+          Validity of ticket - 1 year from date of purchase
+        </p>
+      </div>
+      <div class="cluster-rules-item d-flex align-items-baseline">
+        <span class="me-2 icon">
+          <img src="assets/icons/cutlery.svg" alt="" />
+        </span>
+        <p class="lh-1 text-small">Complimentary snack and beverages</p>
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class="col-12 mx-auto mt-3 collapse" id="{{querySelector}}">
+  <div class="card card-body text-center">
+    <!-- <div class="badge btn rounded-pill p-2 mb-3 m-auto" data-bs-toggle="modal" data-bs-target="#modifysearchModal">
+      <i class="bi bi-pencil-fill text-dark text-small"></i>
+      <span class="text-small text-dark"> Modify Search</span>
+    </div> -->
+    <div class="text-center">
+      <p class="pb-2 text-center border-bottom border-info border-2">
+        {{indexedBookingClusters[indexOfBookingCluster].name}} ({{indexOfBookingCluster}})
+      </p>
+      <p class="h2 primal-text-bold text-center">N {{bookingCluster.selectedTotalCost | number}}</p>
+      <p class="text-danger text-center">{{bookingCluster.selectedSeatsLeft | number}} Seats left</p>
+      <button (click)="openBottomSheet(); chooseFlight();" type="button" class="btn mb-4 primal-bg">
+        Select
+      </button>
+    </div>
+    <div class="offcanvas offcanvas-bottom primal-bg" tabindex="-1" id="offcanvasBottom"
+      aria-labelledby="offcanvasBottomLabel">
+      <div class="col-12 text-center position-absolute modify-btn-float btn">
+        <div class="badge mb-3 p-2 m-auto" data-bs-toggle="modal" data-bs-target="#modifysearchModal">
+          <i class="bi bi-pencil-fill text-dark text-small"></i>
+          <span class="text-small text-dark"> Modify Search</span>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between p-3">
+        <p class="offcanvas-title text-center fw-bold mt-2" id="offcanvasBottomLabel">
+          Flight Summary
+        </p>
+        <button type="button" role="button" class="btn text-white only-icon-btn">
+          <i class="bi bi-chevron-up"></i>
+        </button>
+      </div>
+      <div class="offcanvas-body small">
+        <div class="d-flex flex-column summary-container">
+          <p class="text-small light-weight">Outbound</p>
+          <div class="col d-flex">
+            <p class="primal-text-bold">21:30</p>
+            <p class="ms-2 light-weight">Lagos</p>
+            <div class="d-flex mx-2 align-items-center">
+              <span class="circle"></span>
+              <span class="line"></span>
+              <span class="circle"></span>
+            </div>
+            <p class="primal-text-bold">21:30</p>
+            <p class="ms-2 light-weight">Lagos</p>
+          </div>
+        </div>
+        <div class="mt-2 d-flex flex-column summary-container">
+          <p class="text-small light-weight">Outbound</p>
+          <!-- <p class="primal-text-bold mb-2">Not Selected</p> -->
+          <div class="col d-flex">
+            <p class="primal-text-bold">21:30</p>
+            <p class="ms-2 light-weight">Lagos</p>
+            <div class="d-flex mx-2 align-items-center">
+              <span class="circle"></span>
+              <span class="line"></span>
+              <span class="circle"></span>
+            </div>
+            <p class="primal-text-bold">21:30</p>
+            <p class="ms-2 light-weight">Lagos</p>
+          </div>
+        </div>
+        <div class="col-12 mt-3">
+          <div class="d-grid gap-2">
+            <a routerLink="/payment" class="btn primal-bg-info btn-lg rounded-10">
+              Continue
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let clusterRule of bookingClusterDetail.bookingClusterRules" class="cluster-rules">
+      <div class="cluster-rules-item d-flex align-items-baseline">
+        <span class="me-2 icon">
+          <mat-icon>{{clusterRule.icon}}</mat-icon>
+        </span>
+        <p class="lh-1 text-small">
+          {{clusterRule.text}}
+        </p>
+      </div>
+      <!-- <div class="cluster-rules-item d-flex align-items-baseline">
+        <span class="me-2 icon">
+          <img src="assets/icons/ticket.svg" alt="" />
+        </span>
+        <p class="lh-1 text-small">
+          Fully Changeable Ticket (fare difference and change fee may apply)
+        </p>
+      </div>
+      <div class="cluster-rules-item d-flex align-items-baseline">
+        <span class="me-2 icon">
+          <img src="assets/icons/baggage.svg" alt="" />
+        </span>
+        <p class="lh-1 text-small">Baggage Allowance 20 Kg</p>
+      </div>
+      <div class="cluster-rules-item d-flex align-items-baseline">
+        <span class="me-2 icon">
+          <img src="assets/icons/hand-luggage.svg" alt="" />
+        </span>
+        <p class="lh-1 text-small">
+          Hand Luggage Allowance is one piece 8KG ( 45 cm x 35 cm x 20 cm)
+        </p>
+      </div>
+      <div class="cluster-rules-item d-flex align-items-baseline">
+        <span class="me-2 icon">
+          <img src="assets/icons/no-show-fee.svg" alt="" />
+        </span>
+        <p class="lh-1 text-small">No show fee may apply</p>
+      </div>
+      <div class="cluster-rules-item d-flex align-items-baseline">
+        <span class="me-2 icon">
+          <img src="assets/icons/calender.svg" alt="" />
+        </span>
+        <p class="lh-1 text-small">
+          Validity of ticket - 1 year from date of purchase
+        </p>
+      </div>
+      <div class="cluster-rules-item d-flex align-items-baseline">
+        <span class="me-2 icon">
+          <img src="assets/icons/cutlery.svg" alt="" />
+        </span>
+        <p class="lh-1 text-small">Complimentary snack and beverages</p>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<!-- Modify Flight Search Modal -->
+<!-- Modal -->
+<div class="modal fade" id="modifysearchModal" tabindex="-1" aria-labelledby="modifysearchModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modifysearchModalLabel">
+          Edit flight search criteria
+        </h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-flight-search></app-flight-search>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn text-white primal-bg">
+          Save changes
+        </button>
+      </div> -->
+    </div>
+  </div>
+</div>
+<!-- Modify Flight Search Modal End-->

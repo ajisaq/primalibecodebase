@@ -1,0 +1,38 @@
+.justify-sp {
+    justify-content: space-between!important;
+    align-items: center!important;
+}
+
+.seats > span >img {
+    padding: 25px;
+    background-color: #5661b0;
+    margin: 7px 7px;
+    border-radius: 10px;
+}
+.business-class {
+    background-color: #D0D1D8;
+    border-radius: 15px;
+    padding: 7px;
+    padding-top: 30px;
+    margin: 25px 0;
+}
+
+.seats > span > img:hover {
+    background-color: #050a30;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+.exit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px;
+}
+.exit > p {
+    font-weight: 800;
+    color: #D0D1D8;
+    font-size: 20px;
+}
+
+.selected_seat{
+    background-color:#050a30;
+}

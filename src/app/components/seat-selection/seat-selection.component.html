@@ -1,0 +1,164 @@
+<div class="body">
+  <div class="container p-2 p-md-5">
+    <h3 class="primal-text-blue primal-text-bold mt-4 page-title">
+      Manage Booking
+    </h3>
+    <div class="col-12 col-md-7 mb-3 d-flex rgrid">
+      <!-- <div class="row"> -->
+        <div class="col-3 mx-7 rgrid">
+          <div
+            class="
+              p-2
+              btn
+              d-flex
+              flex-column flex-md-row
+              justify-content-around
+              align-items-center
+              manage-booking-icon-box
+            "
+          >
+            <span><img src="assets/icons/print.svg" alt="" /></span>
+            <span class="text-small text-center">Print Ticket</span>
+          </div>
+        </div>
+        <div class="col-3 mx-7 rgrid">
+          <div
+            class="
+              p-2
+              btn
+              d-flex
+              flex-column flex-md-row
+              justify-content-around
+              align-items-center
+              manage-booking-icon-box
+            "
+          >
+            <span><img src="assets/icons/seat.svg" alt="" /></span>
+            <span class="text-small text-center">Seat Selection</span>
+          </div>
+        </div>
+        <div class="col-3 mx-7 rgrid">
+          <div
+            class="
+              p-2
+              btn
+              d-flex
+              flex-column flex-md-row
+              justify-content-around
+              align-items-center
+              manage-booking-icon-box
+            "
+          >
+            <span><img src="assets/icons/change-flight.svg" alt="" /></span>
+            <span class="text-small text-center">Change Flight</span>
+          </div>
+        </div>
+        <div class="col-3 mx-7 rgrid">
+          <div
+            routerLink="/check-in"
+            class="
+              p-2
+              btn
+              d-flex
+              flex-column flex-md-row
+              justify-content-around
+              align-items-center
+              manage-booking-icon-box
+            "
+          >
+            <span><img src="assets/icons/online-checkin.svg" alt="" /></span>
+            <span class="text-small text-center">Online Check-In</span>
+          </div>
+        </div>
+        <div class="col-3 mx-7 rgrid">
+          <div
+            routerLink="/check-in"
+            class=" p-2 btn d-flex flex-column flex-md-row justify-content-around align-items-center manage-booking-icon-box " >
+            <span><img src="assets/icons/passenger.svg" alt="" /></span>
+            <span class="text-small text-center">Contact</span>
+          </div>
+        </div>
+        <div class="col-3 mx-7 rgrid">
+          <div
+            routerLink="/manage-booking/{{PNR}}"
+            class="
+              p-2
+              btn
+              d-flex
+              flex-column flex-md-row
+              justify-content-around
+              align-items-center
+              manage-booking-icon-box
+            "
+          >
+            <span><img src="assets/icons/envelope.svg" alt="" /></span>
+            <span class="text-small text-center">My Booking</span>
+          </div>
+        </div>
+        <div class="col-3 mx-7 rgrid">
+          <div
+            routerLink="/check-in"
+            class="
+              p-2
+              btn
+              d-flex
+              flex-column flex-md-row
+              justify-content-around
+              align-items-center
+              manage-booking-icon-box
+            "
+          >
+            <span><img src="assets/icons/envelope.svg" alt="" /></span>
+            <span class="text-small text-center">Send Email</span>
+          </div>
+        </div>
+      <!-- </div> -->
+    </div>
+    <mat-tab-group>
+        <mat-tab *ngFor="let bookingLegKey of objectKeys(cabinByBookingLegs)" [label]="cabinByBookingLegs[bookingLegKey].flight.departAirport.code + ' - ' + cabinByBookingLegs[bookingLegKey].flight.arriveAirport.code">
+          <div class="d-flex dynamic">
+            <div class="col-md-3 mt-4 mt-sm-0 mt-md-0">
+              <h3 class=" f-24 primal-text-blue primal-text-bold mt-4 page-title">
+                  Select your Seat(s)
+              </h3>
+              <div *ngFor="let coupon of cabinByBookingLegs[bookingLegKey].coupons" class="card manage-booking-card my-9">
+                <div (click)="selectPassenger(coupon, cabinByBookingLegs[bookingLegKey])" [class]="(seatSelectionForm.value.selectedPassenger === ('/api/passengers/'+coupon.passenger.id)) ? 'card-body selected' : 'card-body'">
+                  <div class="mt-3">
+                    <div class="d-flex flex-column">
+                      <p class="mb-3 f-24"> {{coupon.passenger.title}} {{coupon.passenger.first_name}} {{coupon.passenger.last_name}}</p>
+                      <div class="row d-md-flex">
+                        <div class="col-md-6 d-flex align-items-center mt-3">
+                          <div class="col-2 d-flex justify-content-right m-r-10">
+                            <span>
+                              <img
+                                class="float-end"
+                                src="assets/icons/seat.svg"
+                                alt=""
+                              />
+                            </span>
+                          </div>
+                          <div class="">
+                            <p class="light-weight text-small">Selected Seat</p>
+                            <p class="lh-sm light-weight">{{coupon.reservedSeatName}}</p>
+                          </div>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-9" style="margin-left: 25px;">
+              <mat-card class="example-card">
+                <mat-card-content>
+                  <html-seats *ngIf="cabinByBookingLegs[bookingLegKey].cabinForm" [OnDCS]="true" [seatSelectionForm]="seatSelectionForm" [CabinForm]="cabinByBookingLegs[bookingLegKey].cabinForm" [ReservedSeats]="reservedSeats" [BlockedSeats]="blockedSeats"></html-seats>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+        </mat-tab>
+        
+    </mat-tab-group>
+  </div>
+</div>

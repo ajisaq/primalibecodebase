@@ -1,0 +1,57 @@
+<form [formGroup]="changeFlightForm" (ngSubmit)="onSubmit()" novalidate>
+    <mat-card class="example-card">
+      <mat-card-content>
+        <div class="row">
+          <div class="col-12 col-md-5 mb-3">
+            <div class="
+                d-flex
+                align-items-center
+                input-wrapper
+                position-relative
+              ">
+              <label class="text-small light-weight text-input-hint" for="">Where are you flying from?</label>
+              <span class="me-3"><img src="assets/icons/plane-take-off.svg" alt="" /></span>
+              <!-- <input hidden type="text" formControlName="origin" placeholder="Origin" /> -->
+              <input type="text" placeholder="Origin" aria-label="Number" disabled="disabled"  formControlName="origin"
+                />
+             
+            </div>
+          </div>
+          <div class="d-none  d-md-flex input-wrapper-rounded">
+            <i class="bi bi-arrow-left-right"></i>
+          </div>
+          <div class="col-12 col-md-5 mb-3">
+            <div class="
+                d-flex
+                align-items-center
+                input-wrapper
+                position-relative
+              ">
+              <label class="text-small light-weight text-input-hint" for="">Where are you flying to?</label>
+              <span class="me-3"><img src="assets/icons/plane-land.svg" alt="" /></span>
+              <!-- <input hidden type="text"  formControlName="destination" placeholder="Destination" /> -->
+              <input type="text" disabled="disabled" placeholder="Destination" aria-label="Number" formControlName="destination" 
+                 />
+            </div>
+          </div>
+          
+          <div class="col-12 mb-3">
+            <div class="
+                d-flex
+                align-items-center
+                input-wrapper
+                position-relative
+              ">
+              <label class="text-small light-weight text-input-hint" for="departureDate">Departure Date</label>
+              <span class="me-3"><img src="assets/icons/calender2.svg" alt="" /></span>
+              <input type="date" formControlName="departureDate" placeholder="17th Nov 2021" />
+            </div>
+          </div>
+          <div class="d-grid gap-2">
+            <button class="btn primal-bg text-white btn-lg" type="submit">
+              Search Flight
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>

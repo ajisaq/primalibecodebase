@@ -1,0 +1,40 @@
+<app-spinner *ngIf="isLoadingFlights"></app-spinner>
+<div class="container-fluid">
+  <div class="p-lg-4">
+    <div class="row mb-3">
+      <mat-stepper [id]="stepper" class="booking-stepper" #stepper>
+        <mat-step label="Select Flight" state="radio_button_unchecked">
+          <app-one-way></app-one-way>
+        </mat-step>
+        <mat-step label="Payment" state="radio_button_unchecked">
+          <div class="row">
+            <div class="col-12 col-md-8">
+              <app-passenger-information [isSubmitted]="isSubmitted">
+              </app-passenger-information>
+            </div>
+            <div class="col-12 col-md-4 ">
+              <div class="row gy-3">
+                <div class="col-12 order-md-first">
+                  <app-summary-card (submitStatus)="setIsSubmitted()">
+                  </app-summary-card>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+          </div>
+        </mat-step>
+        <mat-step label="Confirmation" state="radio_button_unchecked">
+          <div class="col-12">
+            <app-flight-confirmation></app-flight-confirmation>
+          </div>
+        </mat-step>
+
+        <!-- Override Stepper Icons -->
+        <ng-template matStepperIcon="radio_button_unchecked">
+          <mat-icon>check_circle</mat-icon>
+        </ng-template>
+      </mat-stepper>
+    </div>
+  </div>
+</div>

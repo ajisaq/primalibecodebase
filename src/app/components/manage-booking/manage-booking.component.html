@@ -1,0 +1,293 @@
+<div class="body">
+  <div class="container p-2 p-md-5">
+    <h3 class="text-center primal-text-blue primal-text-bold mt-4 page-title no-print">
+      Manage Booking
+    </h3>
+    <h3 class="text-center primal-text-blue primal-text-bold mt-4 page-title d-none">
+      Flight Ticket
+    </h3>
+    <div class="col-12 col-md-7 mb-3 d-flex no-print">
+      <!-- <div class="row"> -->
+        <div class="col-3 mx-7">
+          <div
+          (click)="printTicket()"
+            class="
+              p-2
+              btn
+              d-flex
+              flex-column flex-md-row
+              justify-content-around
+              align-items-center
+              manage-booking-icon-box
+            "
+          >
+            <span><img src="assets/icons/print.svg" alt="" /></span>
+            <span class="text-small text-center">Print Ticket</span>
+          </div>
+        </div>
+        <div class="col-3 mx-7">
+          <div
+          (click)="selectSeat()"
+          
+            class="
+              p-2
+              btn
+              d-flex
+              flex-column flex-md-row
+              justify-content-around
+              align-items-center
+              manage-booking-icon-box
+            "
+          >
+            <span><img src="assets/icons/seat.svg" alt="" /></span>
+            <span class="text-small text-center">Seat Selection</span>
+          </div>
+        </div>
+        <div class="col-3 mx-7">
+          <div
+            (click)="changeFlight(pricingDetails)"
+            class="
+              p-2
+              btn
+              d-flex
+              flex-column flex-md-row
+              justify-content-around
+              align-items-center
+              manage-booking-icon-box
+            "
+          >
+            <span><img src="assets/icons/change-flight.svg" alt="" /></span>
+            <span class="text-small text-center">Change Flight</span>
+          </div>
+        </div>
+        <div class="col-3 mx-7">
+          <div
+            routerLink="/check-in"
+            class="
+              p-2
+              btn
+              d-flex
+              flex-column flex-md-row
+              justify-content-around
+              align-items-center
+              manage-booking-icon-box
+            "
+          >
+            <span><img src="assets/icons/online-checkin.svg" alt="" /></span>
+            <span class="text-small text-center">Online Check-In</span>
+          </div>
+        </div>
+        <div class="col-3 mx-7">
+          <div
+            routerLink="/check-in"
+            class="
+              p-2
+              btn
+              d-flex
+              flex-column flex-md-row
+              justify-content-around
+              align-items-center
+              manage-booking-icon-box
+            "
+          >
+            <span><img src="assets/icons/passenger.svg" alt="" /></span>
+            <span class="text-small text-center">Get Boarding Pass</span>
+          </div>
+      </div>
+      <div class="col-3 mx-7">
+        <div
+        routerLink="manage-booking/{{passengerInfo.pnr}}"
+          class="
+            p-2
+            btn
+            d-flex
+            flex-column flex-md-row
+            justify-content-around
+            align-items-center
+            manage-booking-icon-box
+          "
+        >
+          <span><img src="assets/icons/envelope.svg" alt="" /></span>
+          <span class="text-small text-center">My Booking</span>
+        </div>
+    </div>
+    <div class="col-3 mx-7">
+      <div
+        (click)="sendTicketToEmail()"
+        class="
+          p-2
+          btn
+          d-flex
+          flex-column flex-md-row
+          justify-content-around
+          align-items-center
+          manage-booking-icon-box
+        "
+      >
+        <span><img src="assets/icons/envelope.svg" alt="" /></span>
+        <mat-spinner diameter="10" *ngIf="isLoading"></mat-spinner>
+                <span *ngIf="isLoading"> Requesting... </span>
+        <span *ngIf="!isLoading" class="text-small text-center">Send Email</span>
+      </div>
+  </div>
+    </div>
+    <div class="row">
+      <div *ngFor="let flightDetail of flightSummaryDetails; let i=index;" class="row p-flex">
+        <h1 *ngIf="i==0">Outbound</h1>
+        <h1 *ngIf="i==1">Inbound</h1>
+      <div class="col-12 col-md-6 p-70">
+        
+        <div class="card manage-booking-card">
+          <div class="card-body">
+            <!-- Manage Booking Outbound  -->
+            <div class="mt-3">
+              
+              <div class="d-flex flex-column p-flex">
+                <!-- <p class="mb-3" *ngIf="i==0">Outbound</p>
+                <p class="mb-3" *ngIf="i==1">Inbound</p> -->
+                <div class="col d-flex align-items-baseline">
+                  <p class="primal-text-bold">{{flightDetail?.etd}}</p>
+                  <p class="ms-2 light-weight">{{flightDetail?.dapartAirportCode}}</p>
+                  <div class="d-flex mx-2 align-items-center">
+                    <span class="circle"></span>
+                    <span class="line"></span>
+                    <span class="circle"></span>
+                  </div>
+                  <p class="primal-text-bold fw-bold">{{flightDetail?.eta}}</p>
+                  <p class="ms-2 light-weight">{{flightDetail?.arriveAirportCode}}</p>
+                </div>
+                <div class="d-flex flex-column flex-md-row">
+                  <div class="text-small">Flight: 
+                    <span class="light-weight text-small">
+                    {{flightDetail.flightNumber}}
+                  </span>
+                  <span class="mx-2 primal-info-color">|</span> 
+                </div>
+
+                <div class="text-small"> Cabin Class:
+                  <span class="light-weight text-small">
+                    {{flightDetail.cabinClass}}
+                    </span>
+                    <span class="mx-2 primal-info-color">|</span> 
+                </div>
+
+                <div class="text-small"> Booking Class:
+                  <span class="light-weight text-small">
+                    {{flightDetail.bookingClass | uppercase}}
+                    </span>
+                </div>
+                </div>
+                <div class="row p-flex d-md-flex">
+                  <div class="col-md-6 d-flex align-items-center mt-3">
+                    <div class="col-2 d-flex jusstify-content-right">
+                      <span>
+                        <img
+                          class="float-end"
+                          src="assets/icons/plane-take-off.svg"
+                          alt=""
+                        />
+                      </span>
+                    </div>
+                    <div class="col-7 px-10">
+                      <p class="text-small">Departure</p>
+                      <p class="lh-sm light-weight">{{flightSummaryDetails[i]?.dapartDate}}</p>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6 d-flex align-items-center mt-3">
+                    <div class="col-2">
+                      <span>
+                        <img src="assets/icons/plane-land.svg" alt="" />
+                      </span>
+                    </div>
+                    <div class="col-7 px-10">
+                      <p class="text-small">Arrival</p>
+                      <p class="lh-sm light-weight">{{flightSummaryDetails[i]?.arriveDate}}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6 d-flex align-items-center mt-3">
+                    <div class="col-2">
+                      <span>
+                        <img src="assets/icons/clock.svg" alt="" />
+                      </span>
+                    </div>
+                    <div class="col-7 px-10">
+                      <p class="text-small">Flight Duration</p>
+                      <p class="lh-sm light-weight">{{flightSummaryDetails[i]?.flightDuration}}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6 d-flex align-items-center mt-3">
+                    <div class="col-2">
+                      <span>
+                        <img
+                          src="assets/icons/confirmation-number.svg"
+                          alt=""
+                        />
+                      </span>
+                    </div>
+                    <div class="col-7 px-10">
+                      <p class="text-small">Confirmation Number</p>
+                      <p class="lh-sm light-weight">{{passengerInfo.pnr}}</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6 d-flex align-items-center mt-3">
+                    <div class="col-2">
+                      <span>
+                        <img src="assets/icons/passenger.svg" alt="" />
+                      </span>
+                    </div>
+                    <div class="col-7 px-10">
+                      <p class="text-small">Passenger(s) Name</p>
+                      <p class="lh-sm light-weight" *ngFor="let passenger of passengerInfo.passengers">{{passenger.firstName}} {{passenger.lastName}}
+                        <span class="lh-sm light-weight">({{passenger.gender == 'Male' ? 'M': 'F' }})</span>
+                      </p>
+                    </div>
+                  </div>
+                 
+                </div>
+              </div>
+            </div>
+            <!-- <hr /> -->
+          </div>
+        </div>
+        </div>
+      <div class="col-md-4 mt-4 mt-sm-0 mt-md-0 p-30">
+        <div class="card primal-bg">
+          <div class="card-body">
+            <div class="row flight-summary-text">
+              <div class="col-12">
+                <div class="row mt-4">
+                  <div class="col-12 col-blk">
+                    <h4 class="primal-text-bold">Pricing Details</h4>
+                    <p class="text-small leight-weight">Ticket Cost: N{{flightDetail.pricingDetail.ticketCost | number }}</p>
+                    <p class="text-small leight-weight">
+                      Total Tax Amount: N{{flightDetail.pricingDetail.totalTaxAmount | number}}
+                    </p>
+                    <p class="text-small leight-weight">
+                      Total Surcharge: N{{flightDetail.pricingDetail.totalSurcharge | number}}
+                    </p>
+                    <p class="text-small leight-weight">
+                      Service Charge: N{{flightDetail.pricingDetail.serviceCharge | number}}
+                    </p>
+                    <p class="text-small leight-weight">
+                      Passenger 1 15kg Extra Baggage: N{{flightDetail.pricingDetail.extraBaggage}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="my-3">
+                <div
+                  class="rounded-10 text-center bg-light text-primal-blue p-3"
+                >
+                  <p class="text-small mt-2">Total Price</p>
+                  <p class="primal-text-bold fw-bold">N{{flightDetail.pricingDetail.totalticketCost}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+.card {
+  border-radius: 10px;
+}
+
+.badge {
+  width: 119px;
+  background: #8db7ff;
+  border-radius: 10px;
+  padding: 5px 7px;
+}
+
+.badge i {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.summary-container p {
+  margin-bottom: -3.5px !important;
+}
+
+.modify-btn-float {
+  top: -8px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modify-btn-float .badge {
+  border-radius: 10px 10px 0 0;
+}
+
+.modal-content {
+  background-color: #e5e5e5;
+}
+
+.modal-header {
+  border-bottom: none;
+}

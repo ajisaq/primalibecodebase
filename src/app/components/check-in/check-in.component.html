@@ -1,0 +1,185 @@
+<div class="body">
+  <div class="container p-2 p-md-5">
+    <h3 class="text-center primal-text-blue primal-text-bold my-4 page-title">
+      Online Check-In
+    </h3>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card manage-booking-card">
+          <div class="card-body">
+            <!-- Manage Booking Outbound  -->
+            <div class="row">
+              <div class="col-sm-12 col-md-4">
+                <p class="mb-3 h4">Outbound</p>
+                <div class="col d-flex align-items-baseline">
+                  <p class="primal-text-bold">21:30</p>
+                  <p class="ms-2 light-weight">Lagos</p>
+                  <div class="d-flex mx-2 align-items-center">
+                    <span class="circle"></span>
+                    <span class="line"></span>
+                    <span class="circle"></span>
+                  </div>
+                  <p class="primal-text-bold fw-bold">21:30</p>
+                  <p class="ms-2 light-weight">Abuja</p>
+                </div>
+                <div class="col">
+                  <p>
+                    <span class="light-weight text-small"
+                      >Flight: W3-710
+                      <span class="primal-info-color">|</span>
+                      12/12/2021</span
+                    >
+                  </p>
+                  <p>
+                    <span class="light-weight text-small"
+                      >Cabin Class: Economy
+                      <span class="primal-info-color">|</span> Booking Class:
+                      Economy</span
+                    >
+                  </p>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-8 mt-3">
+                <div class="row">
+                  <div class="col-sm-6 col-md-4 d-flex align-items-center mb-3">
+                    <img
+                      class="float-end"
+                      src="assets/icons/plane-take-off.svg"
+                      alt=""
+                    />
+                    <span class="light-weight d-flex flex-column ms-3">
+                      <p class="text-small light-weight">Departure</p>
+                      <p class="light-weight">12 December, 21:30</p>
+                    </span>
+                  </div>
+                  <div class="col-sm-6 col-md-4 d-flex align-items-center mb-3">
+                    <img
+                      class="float-end"
+                      src="assets/icons/clock.svg"
+                      alt=""
+                    />
+                    <span class="light-weight d-flex flex-column ms-3">
+                      <p class="text-small light-weight">Flight Duration</p>
+                      <p class="light-weight">1 hr, 35 mins</p>
+                    </span>
+                  </div>
+                  <div class="col-sm-6 col-md-4 d-flex align-items-center mb-3">
+                    <img
+                      class="float-end"
+                      src="assets/icons/confirmation-number.svg"
+                      alt=""
+                    />
+                    <span class="light-weight d-flex flex-column ms-3">
+                      <p class="text-small light-weight">Confirmation Number</p>
+                      <p class="light-weight">157PRS</p>
+                    </span>
+                  </div>
+                  <div class="col-sm-6 col-md-4 d-flex align-items-center mb-3">
+                    <img
+                      class="float-end"
+                      src="assets/icons/plane-land.svg"
+                      alt=""
+                    />
+                    <span class="light-weight d-flex flex-column ms-3">
+                      <p class="text-small light-weight">Arrival</p>
+                      <p class="light-weight">12 December, 10:45</p>
+                    </span>
+                  </div>
+                  <div class="col-sm-6 col-md-4 d-flex align-items-center mb-3">
+                    <img
+                      class="float-end"
+                      src="assets/icons/passenger.svg"
+                      alt=""
+                    />
+                    <span class="light-weight d-flex flex-column ms-3">
+                      <p class="text-small light-weight">Passenger Name</p>
+                      <p class="light-weight">Mr. Akim John</p>
+                    </span>
+                  </div>
+                  <div class="col-sm-6 col-md-4 d-flex align-items-center mb-3">
+                    <img
+                      class="float-end"
+                      src="assets/icons/seat-light.svg"
+                      alt=""
+                    />
+                    <span class="light-weight d-flex flex-column ms-3">
+                      <p class="text-small light-weight">Seat Number</p>
+                      <p class="light-weight">6B</p>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Manage Booking Outbound -->
+            <div class="col-12 mt-3">
+              <div class="d-grid gap-2">
+                <button
+                  class="btn primal-bg btn-lg rounded-10"
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#checkinModal"
+                >
+                  Check In
+                </button>
+              </div>
+              <!-- Modal -->
+              <div
+                class="modal fade"
+                id="checkinModal"
+                tabindex="-1"
+                aria-labelledby="checkinModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-sm">
+                  <div class="modal-content rounded-10">
+                    <div class="modal-header">
+                      <button
+                        type="button"
+                        class="
+                          btn-close
+                          primal-bg
+                          rounded-10
+                          text-white
+                          opacity-100
+                        "
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <i class="bi bi-x-lg"></i>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p
+                        class="
+                          primal-text-bold primal-text-blue
+                          text-center
+                          d-flex
+                          flex-column
+                        "
+                      >
+                        <span class="fw-bold mb-2"
+                          >You are now checked in.</span
+                        >
+                        <span class="light-weight text-small"
+                          >Have a safe flight.</span
+                        >
+                      </p>
+                    </div>
+                    <div class="modal-footer"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-12 text-center">
+        <h1 class="text-center fw-bold">Checked-In</h1>
+        <p class="text-center light-weight">You have not yet checked in</p>
+      </div>
+    </div>
+  </div>
+</div>

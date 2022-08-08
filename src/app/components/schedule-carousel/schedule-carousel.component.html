@@ -1,0 +1,51 @@
+<!-- <div class="position-relative mb-5">
+  <div class="container-fluid">
+    <div class="slider-wrap row position-relative">
+      <div class="col-12">
+        <div *ngFor="let indexedFlightByDate of getLowestPrices(); let i=index;"
+          (click)="selectDate(indexedFlightByDate.displayDate)"
+          [style]="(indexedFlightByDate.displayDate == selectedDate) ? 'background-color: var(--primal-blue); color: white' : ''"
+          class="col-4 col-sm-3 col-md-2 item">
+          <div class="schedule d-flex flex-column">
+            <span class="text-center">{{formatDisplayDate(indexedFlightByDate.displayDate)}}</span>
+            <span class="text-small text-center">from</span>
+            <span class="fw-bold text-center">{{indexedFlightByDate.flight.adult_cost ? ('N
+              '+indexedFlightByDate.flight.adult_cost) : 'No Flight'}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-area">
+      <button (click)="previousDays()" type="button" class="prev" appPreviousBtn>
+        <i class="bi bi-chevron-left"></i>
+      </button>
+      <button (click)="nextDays()" type="button" class="next" appNextBtn>
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</div> -->
+
+
+
+
+<!--  Flights Slider -->
+<div class="position-relative">
+  <div class="container-fluid">
+    <div class="slider-wrapper">
+      <div class="slider-container d-flex justify-content-center">
+        <div *ngFor="let indexedFlightByDate of getLowestPrices(); let i=index;"
+          (click)="selectDate(indexedFlightByDate.displayDate)"
+          [style]="(indexedFlightByDate.displayDate == selectedDate) ? 'background-color: var(--primal-blue); color: white' : ''"
+          class="slider-item">
+          <span class="light-weight">{{formatDisplayDate(indexedFlightByDate.displayDate)}}</span>
+          <span class="text-small">From</span>
+          <span class="primal-text-bold">{{indexedFlightByDate.flight.adult_cost ? ('N
+            '+(indexedFlightByDate.flight.adult_cost | number)) : 'No Flight'}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="position-absolute slider-ctrl-btn prev-btn" appPreviousBtn><i class="bi bi-chevron-left"></i></button>
+  <button class="position-absolute slider-ctrl-btn next-btn" appNextBtn><i class="bi bi-chevron-right"></i></button>
+</div>

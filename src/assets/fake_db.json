@@ -1,0 +1,260 @@
+{
+  "@context": "/api/contexts/Airport",
+  "@id": "/api/airports",
+  "@type": "hydra:Collection",
+  "hydra:member": [
+    {
+      "@id": "/api/airports/1",
+      "@type": "http://schema.org/Thing",
+      "id": 1,
+      "code": "ABV",
+      "icao": "DNAA",
+      "name": "Nnamdi Azikiwe International Airport, Abuja",
+      "state": "FCT",
+      "city": {
+        "@id": "/api/cities/1",
+        "@type": "http://schema.org/City",
+        "id": 1,
+        "code": "ABV",
+        "name": "Abuja"
+      },
+      "hide_on_web": false,
+      "web_check_in": true,
+      "surcharge_amount": 1000
+    },
+    {
+      "@id": "/api/airports/2",
+      "@type": "http://schema.org/Thing",
+      "id": 2,
+      "code": "LOS",
+      "icao": "DNMM",
+      "name": "Murtala Muhammed International Airport (MMIA)",
+      "state": "Lagos State",
+      "city": {
+        "@id": "/api/cities/2",
+        "@type": "http://schema.org/City",
+        "id": 2,
+        "code": "LOS",
+        "name": "Lagos"
+      },
+      "hide_on_web": false,
+      "web_check_in": true
+    },
+    {
+      "@id": "/api/airports/3",
+      "@type": "http://schema.org/Thing",
+      "id": 3,
+      "code": "PHC",
+      "icao": "DNPO",
+      "name": "Port Harcourt International Airport",
+      "city": {
+        "@id": "/api/cities/5",
+        "@type": "http://schema.org/City",
+        "id": 5,
+        "code": "PHC",
+        "name": "Port Harcourt"
+      },
+      "hide_on_web": false,
+      "web_check_in": true,
+      "surcharge_amount": 2000
+    },
+    {
+      "@id": "/api/airports/4",
+      "@type": "http://schema.org/Thing",
+      "id": 4,
+      "code": "YOL",
+      "icao": "DNYO",
+      "name": "Yola International Airport",
+      "city": {
+        "@id": "/api/cities/4",
+        "@type": "http://schema.org/City",
+        "id": 4,
+        "code": "YOL",
+        "name": "YOLA"
+      },
+      "hide_on_web": false,
+      "web_check_in": true
+    },
+    {
+      "@id": "/api/airports/5",
+      "@type": "http://schema.org/Thing",
+      "id": 5,
+      "code": "KAN",
+      "icao": "DNKN",
+      "name": "Mallam Aminu Kano International Airport",
+      "city": {
+        "@id": "/api/cities/3",
+        "@type": "http://schema.org/City",
+        "id": 3,
+        "code": "KAN",
+        "name": "KANO"
+      },
+      "hide_on_web": false,
+      "web_check_in": true,
+      "surcharge_amount": 2000
+    },
+    {
+      "@id": "/api/airports/6",
+      "@type": "http://schema.org/Thing",
+      "id": 6,
+      "code": "SKO",
+      "icao": "DNSO",
+      "name": "Sultan Abubakar III International Airport Sokoto",
+      "state": "SOKOTO",
+      "city": {
+        "@id": "/api/cities/6",
+        "@type": "http://schema.org/City",
+        "id": 6,
+        "code": "SOK",
+        "name": "SOKOTO"
+      },
+      "hide_on_web": false,
+      "web_check_in": true,
+      "surcharge_amount": 2000
+    },
+    {
+      "@id": "/api/airports/7",
+      "@type": "http://schema.org/Thing",
+      "id": 7,
+      "code": "KIA",
+      "icao": "KDN",
+      "name": "Kaduna International Airport",
+      "state": "Kaduna",
+      "city": {
+        "@id": "/api/cities/3",
+        "@type": "http://schema.org/City",
+        "id": 3,
+        "code": "KAN",
+        "name": "KANO"
+      },
+      "hide_on_web": false,
+      "web_check_in": false,
+      "surcharge_amount": 0
+    },
+    {
+      "@id": "/api/airports/8",
+      "@type": "http://schema.org/Thing",
+      "id": 8,
+      "code": "BNI",
+      "icao": "DNBE",
+      "name": "Benin Airport",
+      "state": "Benin ",
+      "city": {
+        "@id": "/api/cities/10",
+        "@type": "http://schema.org/City",
+        "id": 10,
+        "code": "BNI",
+        "name": "Benin"
+      },
+      "hide_on_web": false,
+      "web_check_in": true,
+      "surcharge_amount": 0
+    },
+    {
+      "@id": "/api/airports/9",
+      "@type": "http://schema.org/Thing",
+      "id": 9,
+      "code": "MIU",
+      "icao": "DNMA",
+      "name": "Maiduguri International Airport",
+      "state": "Maiduguri",
+      "city": {
+        "@id": "/api/cities/9",
+        "@type": "http://schema.org/City",
+        "id": 9,
+        "code": "MIU",
+        "name": "Maiduguri"
+      },
+      "hide_on_web": false,
+      "web_check_in": true,
+      "surcharge_amount": 0
+    },
+    {
+      "@id": "/api/airports/10",
+      "@type": "http://schema.org/Thing",
+      "id": 10,
+      "code": "GMO",
+      "icao": "DNGO",
+      "name": "Sani Abacha International Airport",
+      "state": "Gombe",
+      "city": {
+        "@id": "/api/cities/8",
+        "@type": "http://schema.org/City",
+        "id": 8,
+        "code": "GMO",
+        "name": "Gombe"
+      },
+      "hide_on_web": false,
+      "web_check_in": true,
+      "surcharge_amount": 0
+    }
+  ],
+  "hydra:totalItems": 10,
+  "hydra:search": {
+    "@type": "hydra:IriTemplate",
+    "hydra:template": "/api/airports/dropdown{?name,code,code[],collect_excess_baggage,hide_on_web,web_check_in,barcode_availability,minimum_connecting_minute,minimum_connecting_minute[],simplesearch}",
+    "hydra:variableRepresentation": "BasicRepresentation",
+    "hydra:mapping": [
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "name",
+        "property": "name",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "code",
+        "property": "code",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "code[]",
+        "property": "code",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "collect_excess_baggage",
+        "property": "collect_excess_baggage",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "hide_on_web",
+        "property": "hide_on_web",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "web_check_in",
+        "property": "web_check_in",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "barcode_availability",
+        "property": "barcode_availability",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "minimum_connecting_minute",
+        "property": "minimum_connecting_minute",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "minimum_connecting_minute[]",
+        "property": "minimum_connecting_minute",
+        "required": false
+      },
+      {
+        "@type": "IriTemplateMapping",
+        "variable": "simplesearch",
+        "property": "id, name, code",
+        "required": false
+      }
+    ]
+  }
+}

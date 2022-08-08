@@ -1,0 +1,86 @@
+.manage-booking-icon-box {
+  background: #ffffff;
+  box-shadow: 0px 1px 5px rgba(5, 10, 48, 0.15);
+  border-radius: 10px;
+}
+
+.manage-booking-icon img {
+  line-height: 1rem !important;
+}
+
+.manage-booking-card {
+  background: #ffffff;
+  border: 0.3px solid #a9a9a9;
+  box-shadow: 0px 1px 5px rgba(5, 10, 48, 0.15);
+  border-radius: 15px;
+}
+
+.manage-booking-card p,
+p {
+  line-height: 0.7rem !important;
+}
+
+hr {
+  border: 1.2px solid black;
+}
+.mx-7{
+  margin: 0 7px;
+}
+
+.d-flex{
+  display: fllex;
+}
+.d-none {
+  display: none;
+}
+
+.px-10{
+  padding-left: 10px;
+}
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+    .p-flex {
+      display: flex !important;
+    }
+    .p-70 {
+      width: 70% !important;
+    } 
+    .p-30 {
+      width: 30% !important;
+    } 
+    .d-none {
+      display: block !important;
+    }
+    .col-blk {
+      color: #dee2e6 !important;
+    }
+    .manage-booking-card {
+      border: 0 !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+  }
+  .card {
+    border: none !important;
+    border-radius: 0 !important;
+}
+.d-md-flex {
+  display: flex!important;
+}
+    /* .col-md-7 {
+      width: 30% !important;
+    } */
+}
+
+
+@media screen and (max-width: 990px) {
+  .manage-booking-icon-box {
+    min-width: 73px;
+    min-height: 73px;
+    display: flex;
+    flex-direction: column !important;
+  }
+}

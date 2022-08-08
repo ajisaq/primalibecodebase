@@ -1,0 +1,184 @@
+<div style="display: flex; flex-direction: column;"  fxFlex fxLayout="column" class="p-4 pb-8 pl-16 pr-16 buttons">
+    <div *ngIf="!onDCS" fxLayout="row"  (scroll)="_onScroll($event)">
+        <div fxFlex>
+            {{SeatsFormArray.controls.length}} Seats
+        </div>
+        <!-- <div fxFlex> -->
+        <div fxFlex="20" fxFlexLayout="end start" [formGroup]="toolBarForm">
+            <div fxLayout="row" fxLayoutAlign="end start">
+                <mat-radio-group fxFlex aria-label="Select Mode" name="selectMode" formControlName="selectMode">
+                    <mat-radio-button value="single">Single</mat-radio-button>
+                    <br>
+                    <mat-radio-button value="multiple">Multiple {{isControlDown?'*':''}}</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div fxLayout="row" class="py-8" style="max-width: 120px; height:50px;" fusePerfectScrollbar>
+                <span  *ngFor="let x of selectedIndexedSeatForm | keyvalue"> {{x.key}} <span *ngIf="toolBarForm.controls.selectMode.value=='multiple'">,</span> </span>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="end start" *ngIf="toolBarForm.controls.selectMode.value=='multiple'">
+                <div fxFlex>
+                    <button mat-raised-button (click)="openCabinSeatDialogue()">Bulk Update</button>
+                </div>
+            </div>
+            <!-- <div fxFlexLayout="row">
+                <mat-checkbox name="selectOne" formControlName="selectOne"> Select One </mat-checkbox>
+            </div>
+            <div fxFlexLayout="row">
+                <mat-checkbox name="selectMultiple" formControlName="selectMultiple"> Select Multiple </mat-checkbox>
+            </div> -->
+        </div>
+    </div>
+
+
+
+    <!-- <dts-select-container
+        #container="dts-select-container"
+        [(selectedItems)]="selectedSeats"
+        (select)="selectSeat($event)"
+        >
+        <div fxLayout="row">
+            <button [dtsSelectItem]="seat" *ngFor="let seat of [1,3,4,5,6,7,8]">{{ seat }}</button>
+        </div>
+        <div fxLayout="row">
+            <button [dtsSelectItem]="seat" *ngFor="let seat of [11,12,13,14,15,16]">{{ seat }}</button>
+        </div>
+    </dts-select-container> -->
+
+
+    <!-- <mat-checkbox data-cy="selectOnDrag" [(ngModel)]="selectOnDrag">Select on Drag</mat-checkbox>
+    <mat-checkbox data-cy="dragOverItems" [(ngModel)]="dragOverItems">Drag Over Items</mat-checkbox>
+    <mat-checkbox data-cy="disable" [(ngModel)]="disable">Disable</mat-checkbox>
+    <mat-checkbox data-cy="disableRangeSelection" [(ngModel)]="disableRangeSelection"
+      >Disable Range Selection</mat-checkbox
+    >
+    <mat-checkbox data-cy="selectMode" [(ngModel)]="selectMode">Select Mode</mat-checkbox>
+    <mat-checkbox data-cy="selectWithShortcut" [(ngModel)]="selectWithShortcut">Select with Shortcut</mat-checkbox>
+
+    <div class="action-buttons">
+      <button data-cy="selectAll" mat-raised-button (click)="selectContainer.selectAll()">Select All</button>
+      <button data-cy="clearSelection" mat-raised-button (click)="selectContainer.clearSelection()">
+        Clear Selection
+      </button>
+    </div> -->
+
+    <!-- <div *ngIf="false" class="drag-area">
+      <dts-select-container
+        data-cy="select-container"
+        #selectContainer="dts-select-container"
+        [selectMode]="selectMode"
+        [(selectedItems)]="selectedDocuments"
+        [disabled]="disable"
+        [disableRangeSelection]="disableRangeSelection"
+        [selectOnDrag]="selectOnDrag"
+        [selectWithShortcut]="selectWithShortcut"
+      >
+        <mat-grid-list cols="4" rowHeight="200px" gutterSize="20px">
+          <mat-grid-tile [dtsSelectItem]="document" *ngFor="let document of documents">
+            {{ document.name }}
+          </mat-grid-tile>
+        </mat-grid-list>
+      </dts-select-container>
+    </div>
+    
+    <div class="meta h-200" *ngIf="false">
+      <h4>Meta Information</h4>
+      <div>
+        <label>Selected</label> <span data-cy="select-count">{{ selectedDocuments.length }}</span>
+      </div>
+      <ul class="selected-items">
+        <li data-cy="selected-item" class="selected-item" *ngFor="let item of selectedDocuments">{{ item.name }}</li>
+      </ul>
+    </div>
+
+    <div class="meta h-200" *ngIf="false">
+      <h4>Meta Information</h4>
+      <div>
+        <label>Selected</label> <span data-cy="select-count">{{ selectedDocuments.length }}</span>
+      </div>
+      <ul class="selected-items">
+        <li data-cy="selected-item" class="selected-item" *ngFor="let x of selectedIndexedSeatForm | keyvalue">{{ x.key }}</li>
+      </ul>
+    </div> -->
+
+    <!-- </div> -->
+    <div style="display: flex; flex-direction: column;" class="drag-area"  (scroll)="_onScroll($event)" (mouseenter)="_onScroll($event)"  (keydown.control)="onControlDown($event)" (keyup.control)="onControlRelease($event)">
+
+      <dts-select-container
+      style="display: flex; flex-direction: column;"
+      data-cy="select-container"
+      #selectContainer="dts-select-container"
+      [selectMode]="selectMode"
+      [(selectedItems)]="selectedDocuments"
+      [disabled]="disable"
+      [disableRangeSelection]="disableRangeSelection"
+      [selectOnDrag]="selectOnDrag"
+      [selectWithShortcut]="selectWithShortcut"
+      >
+      <div class="cabin">
+        <p style="text-align: center; font-weight: 500;">Cabin</p>
+        <div style="display: flex; flex-direction: row;" *ngFor="let row of seatsModel | keyvalue:indexOrderAsc" class="d-flex justify-content-right justify-sp">
+            <!-- <div fxFlex>
+                {{row.key}}
+            </div> -->
+            
+            <div style="display: flex; flex-direction: row; width: 100%;" class="seats" *ngFor="let col of columns;" >
+              <div style="display: flex;">
+              <!-- <span>
+                <img
+                  class="float-end"
+                  src="assets/icons/seat-light.svg"
+                  alt=""
+                />
+              </span> -->
+                <button *ngIf="!onDCS && seatsModel[row.key][col] && !seatsModel[row.key][col].controls.isBlocked.value"
+                    (click)="onSeatClick(seatsModel[row.key][col],col+row.key)"
+                    (dblclick)="onSeatDoubleClick(seatsModel[row.key][col],col+row.key)"
+                    [class.selectedSeat]="selectedIndexedSeatForm[col+row.key]"
+                    color="accent"
+                    class="px-0"
+                    style="display: flex;"
+                    mat-raised-button
+                    [dtsSelectItem]="seatsModel[row.key][col]" 
+                    >
+                    {{ seatsModel[row.key][col] ? seatsModel[row.key][col].controls.seatColumn.value : '' }}
+                </button>
+                <button *ngIf="onDCS && seatsModel[row.key][col] && !seatsModel[row.key][col].controls.isBlocked.value && !seatsModel[row.key][col].controls.isReserved.value"
+                    (click)="onSeatClick(seatsModel[row.key][col],col+row.key)"
+                    (dblclick)="onSeatDoubleClick(seatsModel[row.key][col],col+row.key)"
+                    [class.selectedSeat]="selectedIndexedSeatForm[col+row.key]"
+                    style="display: flex;"
+                    mat-raised-button
+                    [dtsSelectItem]="seatsModel[row.key][col]" 
+                    >
+                    <img
+                      class="float-end"
+                      src="assets/icons/seat-light.svg"
+                      alt=""
+                    />
+                    <span>{{row.key}}{{ seatsModel[row.key][col] ? seatsModel[row.key][col].controls.seatColumn.value : '' }}</span>
+                </button>
+                <button *ngIf="onDCS && seatsModel[row.key][col] && (seatsModel[row.key][col].controls.isReserved.value || seatsModel[row.key][col].controls.isBlocked.value)"
+                    color="#8B0000"
+                    class="my-class px-0 reserved-blocked"
+                    style="display: flex;" 
+                    >
+                    {{row.key}}{{ seatsModel[row.key][col] ? seatsModel[row.key][col].controls.seatColumn.value : '' }}
+                </button>
+                <button *ngIf="!onDCS && seatsModel[row.key][col] && seatsModel[row.key][col].controls.isBlocked.value"
+                    (click)="onSeatClick(seatsModel[row.key][col],col+row.key)"
+                    [class.selectedSeat]="selectedIndexedSeatForm[col+row.key]"
+                    color="accent"
+                    mat-stroked-button
+                    [dtsSelectItem]="seatsModel[row.key][col]"
+                    >
+                    {{ seatsModel[row.key][col] ? seatsModel[row.key][col].controls.seatColumn.value : '' }}
+                </button>
+              </div>
+            </div>
+        </div>
+      </div>
+      </dts-select-container>
+
+    </div>
+</div>
+
