@@ -155,7 +155,7 @@ console.log(this.flightSearchForm.getRawValue());
 
 
     getSegmentSearchArray(){
-        let resultArray = this.fb.array([]);
+        let resultArray = this.fb.array([]) as FormArray;
         // debugger;
         // (<FormArray>this.bookingForm.get("bookingLegs")).controls.forEach((bookingLegForm: FormGroup) => {
             // let _flight: Flight = bookingLegForm.controls.flight.value;
@@ -357,7 +357,7 @@ console.log(this.indexedAirports);
 
     getBookingLegsFormArray(flight?,flightCabin?,flightCluster?){
         // let bookingLegs = booking_legs.map(booking_leg=>new BookingLeg(booking_leg))
-        let resultArray = this.fb.array([]);
+        let resultArray = this.fb.array([]) as FormArray;
         // let bookingLeg = new BookingLeg(flight);
         // bookingLegs.forEach((bookingLeg: BookingLeg) => {
             let DA = this.indexedAirports[flight.depart_airport].extra.code;
@@ -458,7 +458,7 @@ console.log(this.indexedAirports);
         
         // let bookingLegs = booking_legs.map(booking_leg=>new BookingLeg(booking_leg))
         let calc = flightCabin.calculated;
-        let resultArray = this.fb.array([]);
+        let resultArray = this.fb.array([]) as FormArray;
 
         //singule
         let DA = this.indexedAirports[flight.depart_airport].extra.code;

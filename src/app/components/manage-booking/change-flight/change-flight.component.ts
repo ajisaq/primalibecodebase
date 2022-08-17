@@ -1,10 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import {ActivatedRoute, ParamMap } from '@angular/router';
+import {Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { BatService } from 'src/app/services/bat.service';
 import { FlightSearchComponent } from 'src/app/components/flight-search/flight-search.component';
 import { FlightSearchService } from '../../../services/flightSearch.service';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { FuseConfirmDialogComponent } from 'src/@fuse/components/confirm-dialog/confirm-dialog.component'; 

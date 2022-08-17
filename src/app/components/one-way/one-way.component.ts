@@ -778,7 +778,7 @@ export class OneWayComponent implements OnInit {
 
     getBookingLegsFormArray(flight?: any,flightCabin?: any,flightCluster?: any){
         // let bookingLegs = booking_legs.map(booking_leg=>new BookingLeg(booking_leg))
-        let resultArray = this.fb.array([]);
+        let resultArray = this.fb.array([]) as FormArray;
         // let bookingLeg = new BookingLeg(flight);
         // bookingLegs.forEach((bookingLeg: BookingLeg) => {
             let DA = this.indexedAirports[flight.depart_airport].code;
@@ -879,7 +879,7 @@ export class OneWayComponent implements OnInit {
         
         // let bookingLegs = booking_legs.map(booking_leg=>new BookingLeg(booking_leg))
         let calc = flightCabin.calculated;
-        let resultArray = this.fb.array([]);
+        let resultArray = this.fb.array([]) as FormArray;
 
         //singule
         let DA = this.indexedAirports[flight.depart_airport].code;

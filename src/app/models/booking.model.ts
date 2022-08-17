@@ -215,16 +215,15 @@ export class Coupon{
 
 export class BookedProduct{
    
-    iri            : string;
-    iriType        : string;
-    id             : number;
- 
-    product         : any; //Product
-    name            : string;
-    price           : number;
-    quantity        : number;
-    amount          : number;
-    tax             : number;
+    iri : string;
+    iriType : string;
+    id : number;
+    product : any; //Product
+    name : string;
+    price : number;
+    quantity : number;
+    amount : number;
+    tax : number;
 
     /**
      * Constructor

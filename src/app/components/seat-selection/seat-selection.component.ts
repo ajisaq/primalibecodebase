@@ -1,10 +1,9 @@
 import { Component,  OnInit,  } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {FlightSearchService} from '../../services/flightSearch.service'
 import { SeatSelectionService } from '../../services/seat-selection.service';
 import { DataSource } from '@angular/cdk/table';
-import { Router } from '@angular/router';
-import {ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Seat } from '../../models/seat.model';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -212,7 +211,7 @@ export class SeatSelectionComponent implements OnInit{
      }
      
      getSeatsFormArray(seats:Seat[]){
-         let resultArray = this._formBuilder.array([]);
+         let resultArray = this._formBuilder.array([]) as FormArray;
          seats.forEach((seat) => {
              resultArray.push(
                  this._formBuilder.group({

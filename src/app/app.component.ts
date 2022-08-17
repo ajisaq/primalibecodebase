@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import { map } from 'rxjs/operators';
 import { SplashScreenService } from 'src/app/services/splash-screen.service';
 import { environment } from 'src/environments/environment';
 import { Agent } from './models/agent.model';
@@ -170,35 +171,34 @@ export class AppComponent {
   
       getBookingLegsFormArray(bookingLegs: any){
           // let bookingLegs = booking_legs; //booking_legs.map(booking_leg=>new BookingLeg(booking_leg))
-          let resultArray = this.fb.array([]);
+          let resultArray = this.fb.array([]) as FormArray;
           bookingLegs.forEach((bookingLeg: BookingLeg) => {
-              resultArray.push(
-                  this.fb.group({
-                      id:         [bookingLeg.id],
-                      // booking:  [bookingLeg.booking],
-                      flight  : [new Flight(bookingLeg.flight)], //[new Flight(bookingLeg.flight).iri],
-                      fare    : [new Fare(bookingLeg.fare)],
-                      fareDbrLeg  : [new FareDbrLeg(bookingLeg.fareDbrLeg).iri],
-                      //TODO
-                      bookingLegStops : [bookingLeg.bookingLegStops.map(bStop=>new ScheduleLeg(bStop).iri)],
-                      bookingLegFare: this.getBookingLegFareForm(bookingLeg.bookingLegFare),
-                      // bookingLegProducts: this.getBookingLegProductsFormArray(bookingLeg.bookingLegProducts),
-                      coupons: this.getCouponsFormArray(bookingLeg.coupons),
-                      charges : [[]],//bookingLeg.charges],
-                      expireAt    : [bookingLeg.expireAt],
-                      isCheckedIn : [bookingLeg.isCheckedIn],
-                      isBoarded   : [bookingLeg.isBoarded],
-                      isNoShow    : [bookingLeg.isNoShow],
-                      isDeleted   : [bookingLeg.isDeleted],
-                      checkInX : [bookingLeg.checkIn],
-                      isCancelled : [bookingLeg.isCancelled],
-                      isOpen  : [bookingLeg.isOpen],
-                      isWaitlisted    : [bookingLeg.isWaitlisted],
-                      isTicketed  : [bookingLeg.isTicketed],
-                      cabinClass  : [new CabinClass(bookingLeg.cabinClass).iri],
-                      ssrs    : [bookingLeg.ssrs],
-                  })
-              )
+            let el = this.fb.group<any>({
+                id: [bookingLeg.id],
+                // booking:  [bookingLeg.booking],
+                flight  : [new Flight(bookingLeg.flight)], //[new Flight(bookingLeg.flight).iri],
+                fare    : [new Fare(bookingLeg.fare)],
+                fareDbrLeg  : [new FareDbrLeg(bookingLeg.fareDbrLeg).iri],
+                //TODO
+                bookingLegStops : [bookingLeg.bookingLegStops.map(bStop=>new ScheduleLeg(bStop).iri)],
+                bookingLegFare: this.getBookingLegFareForm(bookingLeg.bookingLegFare),
+                // bookingLegProducts: this.getBookingLegProductsFormArray(bookingLeg.bookingLegProducts),
+                coupons: this.getCouponsFormArray(bookingLeg.coupons),
+                charges : [[]],//bookingLeg.charges],
+                expireAt    : [bookingLeg.expireAt],
+                isCheckedIn : [bookingLeg.isCheckedIn],
+                isBoarded   : [bookingLeg.isBoarded],
+                isNoShow    : [bookingLeg.isNoShow],
+                isDeleted   : [bookingLeg.isDeleted],
+                checkInX : [bookingLeg.checkIn],
+                isCancelled : [bookingLeg.isCancelled],
+                isOpen  : [bookingLeg.isOpen],
+                isWaitlisted    : [bookingLeg.isWaitlisted],
+                isTicketed  : [bookingLeg.isTicketed],
+                cabinClass  : [new CabinClass(bookingLeg.cabinClass).iri],
+                ssrs    : [bookingLeg.ssrs],
+            })
+            resultArray.push(el)
           });
           return resultArray;
       }
@@ -224,7 +224,7 @@ export class AppComponent {
       }
   
       getCouponsFormArray(coupons: Coupon[]|any[]){
-          let resultArray = this.fb.array([]);
+          let resultArray = this.fb.array([]) as FormArray;
           coupons.forEach((coupon: Coupon|any) => {
               resultArray.push(
                   this.fb.group({
@@ -253,7 +253,7 @@ export class AppComponent {
       }
   
       getBookedProductsFormArray(bookedProducts: BookedProduct[]|any[]){
-          let resultArray = this.fb.array([]);
+          let resultArray = this.fb.array([]) as FormArray;
           bookedProducts.forEach((bookedProduct: BookedProduct|any) => {
               resultArray.push(
                   this.fb.group({
@@ -272,7 +272,7 @@ export class AppComponent {
   
       getBookingLegProductsFormArray(blProducts: BookingLegProduct[]|any[]){
           // let bookingLegs = booking_legs; //booking_legs.map(booking_leg=>new BookingLeg(booking_leg))
-          let resultArray = this.fb.array([]);
+          let resultArray = this.fb.array([]) as FormArray;
           blProducts.forEach((blProduct: BookingLegProduct|any) => {
               resultArray.push(
                   this.fb.group({
@@ -290,7 +290,7 @@ export class AppComponent {
   
       getBookingLegStopFaresFormArray(bookingLegStopFares: BookingLegStopFare[]|any[]){
           // let bookingLegs = booking_legs; //booking_legs.map(booking_leg=>new BookingLeg(booking_leg))
-          let resultArray = this.fb.array([]);
+          let resultArray = this.fb.array([]) as FormArray;
           bookingLegStopFares.forEach((bookingLegStopFare: BookingLegStopFare|any) => {
               resultArray.push(
                   this.fb.group({
@@ -312,7 +312,7 @@ export class AppComponent {
   
       getPassengersFormArray(passengers: any){
           // let passengers = passengerz; //passengerz.map(pax=>new Passenger(pax))
-          let resultArray = this.fb.array([]);
+          let resultArray = this.fb.array([]) as FormArray;
           passengers.forEach((passenger: Passenger) => {
               resultArray.push(
                   this.fb.group({
@@ -344,7 +344,7 @@ export class AppComponent {
   
       getContactsFormArray(contacts: any){
           // let contacts = contactz; //passengerz.map(pax=>new Passenger(pax))
-          let resultArray = this.fb.array([]);
+          let resultArray = this.fb.array([]) as FormArray;
           contacts.forEach((contact: Contact) => {
               resultArray.push(
                   this.fb.group({
@@ -365,7 +365,7 @@ export class AppComponent {
   
       getPaymentsFormArray(payments: any){
           // let payments = paymentz; //paymentz.map(pay=>new Payment(pay))
-          let resultArray = this.fb.array([]);
+          let resultArray = this.fb.array([]) as FormArray;
           payments.forEach((payment: Payment) => {
               resultArray.push(
                   this.fb.group({
@@ -387,7 +387,7 @@ export class AppComponent {
   
       getRemarksFormArray(remarks: any){
           // let payments = paymentz; //paymentz.map(pay=>new Payment(pay))
-          let resultArray = this.fb.array([]);
+          let resultArray = this.fb.array([]) as FormArray;
           remarks.forEach((remark: BookingRemark | any) => {
               resultArray.push(
                   this.fb.group({
@@ -405,7 +405,7 @@ export class AppComponent {
   
       getHistoriesFormArray(histories: any){
           // let payments = paymentz; //paymentz.map(pay=>new Payment(pay))
-          let resultArray = this.fb.array([]);
+          let resultArray = this.fb.array([]) as FormArray;
           histories.forEach((history: BookingHistory | any) => {
               resultArray.push(
                   this.fb.group({

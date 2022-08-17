@@ -82,8 +82,7 @@ export class SeatSelectionService implements Resolve<any>
                 
                 // this.getReservedSeatsByLeg()
             ]).then(
-                ([files]) => {
-
+                ([]) => {
 
                     resolve(this.seats);
 

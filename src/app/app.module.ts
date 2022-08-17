@@ -38,7 +38,7 @@ import { PassengerInformationComponent } from './components/passenger-informatio
 import { FlightRulesComponent } from './components/flight-rules/flight-rules.component';
 import { FlightConfirmationComponent } from './components/flight-summary/flight-confirmation.component';
 import { SummaryCardComponent } from './components/flight-summary/summary-card/summary-card.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { OneWaySearchFormComponent } from './components/flight-search/one-way-search-form/one-way-search-form.component';
 import { RoundTripSearchFormComponent } from './components/flight-search/round-trip-search-form/round-trip-search-form.component';
 import { PassengerTypeDropdownComponent } from './components/flight-search/passenger-type-dropdown/passenger-type-dropdown.component';
@@ -73,7 +73,7 @@ import { ChangeFlightComponent } from './components/manage-booking/change-flight
 import { ChangeFlightFormComponent } from './components/manage-booking/change-flight-form/change-flight-form.component';
 
 import { DragToSelectModule } from 'ngx-drag-to-select';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 import { ManageBookingService } from './services/manage-booking.service';
 import { NewFlightChangeComponent } from './components/manage-booking/new-flight-change/new-flight-change.component';
 @NgModule({
@@ -136,7 +136,8 @@ import { NewFlightChangeComponent } from './components/manage-booking/new-flight
     MatExpansionModule,
     MatAutocompleteModule,
     MatSnackBarModule,
-    MatBottomSheetModule,    LoginModule,
+    MatBottomSheetModule,    
+    LoginModule,
     MatProgressSpinnerModule,
     MatButtonModule,
     DragDropModule,
