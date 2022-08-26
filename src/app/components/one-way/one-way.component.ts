@@ -115,10 +115,11 @@ export class OneWayComponent implements OnInit {
         // });
         // fArr.controls.push(segment); 
         // this.flightSearchForm.setControl('segments', fArr);
-        console.log('search from input', this.flightSearchForm, this.flightsearchParams, searchParams);
+        console.log(searchParams);
+        // console.log('search from input', this.flightSearchForm, this.flightsearchParams, searchParams);
         // this.onFlightSearch();
     // }
-    console.log('gotten',searchParams, this.flightsearchParams);
+    // console.log('gotten',searchParams, this.flightsearchParams);
   };
 
   constructor(
@@ -175,7 +176,7 @@ export class OneWayComponent implements OnInit {
     });
     if(this.route.snapshot.queryParams['origin'] && this.route.snapshot.queryParams['destination']){
         this.flightsearchParams = this.route.snapshot.queryParams;
-        console.log('route params',this.route.snapshot.queryParams);
+        // console.log('route params',this.route.snapshot.queryParams);
         if(this.flightsearchParams.origin){
             this.flightSearchForm = this.fb.group({
                 AD: [this.flightsearchParams.adult,[Validators.required]],
@@ -187,12 +188,13 @@ export class OneWayComponent implements OnInit {
             this.searchFlight(); 
         }
     }
-    console.log('input',this.flightSearchFormParams, this.flightsearchParams);
+    // console.log('input',this.flightSearchFormParams, this.flightsearchParams);
     // console.log('lowest prices flight by day',this.getSelectedDateRangeLowestPricesByDate());
   }
 
   openDialog() {
-    this.dialog.open(FlightSearchComponent);
+    this.router.navigate(['/home']);
+    // this.dialog.open(FlightSearchComponent);
   }
 
   getSelectedDateRangeLowestPricesByDate(segmentIndex?:number): any[] {
@@ -339,7 +341,7 @@ export class OneWayComponent implements OnInit {
         // (<FormArray>this.flightSearchForm.get("segments")).push(segment2);
     }
     this.flightSearchForm.setControl('segments', fArr);
-    console.log('search test form arr', this.flightSearchForm, this.flightsearchParams);
+    // console.log('search test form arr', this.flightSearchForm, this.flightsearchParams);
     this.onFlightSearch();
     this.flightSearchService.segmentSearch(
       this.flightsearchParams.origin, 
@@ -409,7 +411,7 @@ export class OneWayComponent implements OnInit {
         flightSearchResultResponse = this.flightSearchResultData;
     }
     let segForm =this.getFlightSearchFormSegments().controls[segmentIndex||0] as FormGroup;
-    console.log('before indexed direct and connecting', thisDay, minDate, maxDate, indexedFlightsByDate, indexedFlightsByDate, indexedConnectingFlightsByDate);
+    // console.log('before indexed direct and connecting', thisDay, minDate, maxDate, indexedFlightsByDate, indexedFlightsByDate, indexedConnectingFlightsByDate);
     flightSearchResultResponse.data.map((flight: any)=>{
         let flightDate = moment(flight.depart_date).format('DD-MM-YYYY');
         if(indexedFlightsByDate[flightDate]){
@@ -432,7 +434,7 @@ export class OneWayComponent implements OnInit {
         segForm.controls['_indexedConnectingFlightsByDate'].setValue(indexedConnectingFlightsByDate);
         segForm.controls['_indexedFlightsByDate'].setValue(indexedFlightsByDate);
     }
-    console.log('indexed direct and connecting', this.indexedFlightsByDate, this.indexedConnectingFlightsByDate, segForm);
+    // console.log('indexed direct and connecting', this.indexedFlightsByDate, this.indexedConnectingFlightsByDate, segForm);
 
     this.selectedDate = selDate.format('DD-MM-YYYY');
     // this.selectedDates[segmentIndex||0] = selDate.format('DD-MM-YYYY');
