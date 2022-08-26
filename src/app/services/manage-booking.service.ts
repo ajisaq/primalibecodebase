@@ -394,7 +394,7 @@ export class ManageBookingService implements Resolve<any>
     }
 
     createReservedSeats(bookingLeg: any, data: any): any {
-        console.log('updating seat: ', data);
+        // console.log('updating seat: ', data);
         let seatReservation: any[] = [];
         bookingLeg.flight.flightLegs.forEach((flightLeg: any) => {
             seatReservation.push({
@@ -402,9 +402,9 @@ export class ManageBookingService implements Resolve<any>
                 "flight_leg": flightLeg,
                 "coupon": data.coupon
               });
-              console.log('ok', seatReservation);
+            //   console.log('ok', seatReservation);
         });
-        console.log(seatReservation);
+        // console.log(seatReservation);
         seatReservation.forEach(element => { 
             console.log(element);
             this.createSeatReservation(element).then( response =>{

@@ -82,7 +82,7 @@ export class Booking
 }
 
 
-export class BookingLeg{
+export class BookingLeg {
    
     iri            : string;
     iriType        : string;

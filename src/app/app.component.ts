@@ -133,9 +133,9 @@ export class AppComponent {
           this.batService.onCreatePNRButtonClicked.pipe().subscribe((clicked:boolean) => this.onSavePNR());
   
       }
-  
+
       openPNR(booking:Booking){
-          // console.log({booking});
+        //   console.log(booking);
           this.bookingForm = this.createBookingForm(booking);
           this.batService.onBookingFormChanged.next(this.bookingForm);
       }

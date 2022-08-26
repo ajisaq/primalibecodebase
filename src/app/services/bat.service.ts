@@ -28,9 +28,9 @@ export class BatService {
     // selectedFares: [];
     paymentsInPNR: []= [];
     passengerTypes: any = {
-        "/api/passenger_types/1": "Adult",
-        "/api/passenger_types/2": "Child",
-        "/api/passenger_types/3": "Infant",
+        "/api/passenger_types/1" : "Adult",
+        "/api/passenger_types/2" : "Child",
+        "/api/passenger_types/3" : "Infant",
     };
 
 
@@ -47,8 +47,6 @@ export class BatService {
 
     addSelectedSegment() {}
     constructor(private _httpClient: HttpClient, private aclService: AclService) {}
-
-
 
     /**
      * Get bookings
@@ -89,16 +87,263 @@ export class BatService {
      */
     addBooking(booking: any): Promise<any>
     {
-        // console.log('adding booking');
+        let param : any = {
+            "date": "2022-08-23T11:13:34.778Z",
+            "effective_date": "2022-08-23T11:13:34.778Z",
+            "status": "NEW",
+            "is_group": true,
+            "booking_legs": [
+              {
+                "flight": "/api/flights/1810",
+                "fare": "string",
+                "charges": [
+                  "string"
+                ],
+                "is_deleted": true,
+                "booking_leg_stops": [
+                  {
+                    "schedule_leg": "string",
+                    "no_of_passengers": 0,
+                    "fare_dbr_leg": "string",
+                    "booking_leg_stop_fare": {
+                      "fare_dbr_leg": "string",
+                      "adult_cost": 0,
+                      "tax": 0,
+                      "surcharge": 0,
+                      "price": 0,
+                      "discount": 0,
+                      "cost": 0,
+                      "cost_breakdown": [
+                        "string"
+                      ]
+                    }
+                  }
+                ],
+                "is_cancelled": true,
+                "is_open": true,
+                "is_waitlisted": true,
+                "is_ticketed": true,
+                "cabin_class": "string",
+                "booking_leg_fare": {
+                  "fare_dbr": "string",
+                  "rbd": "string",
+                  "fare_dbr_leg": "string",
+                  "adult_cost": 0,
+                  "tax": 0,
+                  "surcharge": 0,
+                  "cost_breakdown": [
+                    "string"
+                  ],
+                  "price": 0,
+                  "cost": 0,
+                  "discount": 0,
+                  "manual_fare": 0,
+                  "fare_rules": [
+                    "string"
+                  ],
+                  "cluster_fare_rules": [
+                    "string"
+                  ]
+                },
+                "is_stop_fare": true,
+                "coupons": [
+                  {
+                    "amount": 0,
+                    "currency": "string",
+                    "check_in": {
+                      "time": "2022-08-23T11:13:34.779Z",
+                      "baggage_weight": 0,
+                      "baggage_count": 0,
+                      "airport": "string",
+                      "baggage_status": true,
+                      "agent": "string",
+                      "baggages": [
+                        {
+                          "barcode": "string",
+                          "status": "string",
+                          "location": "string",
+                          "weight": 0,
+                          "description": "string"
+                        }
+                      ],
+                      "bp_print_count": 0
+                    },
+                    "reserved_seats": [
+                      "string"
+                    ],
+                    "reserved_seat_name": "string",
+                    "ssrs": [
+                      "string"
+                    ],
+                    "status": "string",
+                    "is_held_confirmed": true,
+                    "is_ticketed": true,
+                    "is_seat_selected": true,
+                    "is_waitlisted": true,
+                    "is_boarded": true,
+                    "is_no_show": true,
+                    "is_time_changed": true,
+                    "booked_products": [
+                      {
+                        "product": "string",
+                        "name": "string",
+                        "amount": 0,
+                        "tax": 0,
+                        "quantity": 0,
+                        "price": 0
+                      }
+                    ],
+                    "expire_at": "2022-08-23T11:13:34.780Z",
+                    "ticket_number": 0
+                  }
+                ],
+                "expire_at": "2022-08-23T11:13:34.780Z",
+                "rbd": "string"
+              }
+            ],
+            "email": "string",
+            "phone": "string",
+            "passengers": [
+              {
+                "title": "string",
+                "first_name": "string",
+                "last_name": "string",
+                "phone": "string",
+                "address": "string",
+                "gender": "string",
+                "date_of_birth": "2022-08-23T11:13:34.780Z",
+                "email": "string",
+                "ticket_number": "string",
+                "passenger_type": "string",
+                "ffp": "string",
+                "coupons": [
+                  {
+                    "amount": 0,
+                    "currency": "string",
+                    "check_in": {
+                      "time": "2022-08-23T11:13:34.780Z",
+                      "baggage_weight": 0,
+                      "baggage_count": 0,
+                      "airport": "string",
+                      "baggage_status": true,
+                      "agent": "string",
+                      "baggages": [
+                        {
+                          "barcode": "string",
+                          "status": "string",
+                          "location": "string",
+                          "weight": 0,
+                          "description": "string"
+                        }
+                      ],
+                      "bp_print_count": 0
+                    },
+                    "reserved_seats": [
+                      "string"
+                    ],
+                    "reserved_seat_name": "string",
+                    "ssrs": [
+                      "string"
+                    ],
+                    "status": "string",
+                    "is_held_confirmed": true,
+                    "is_ticketed": true,
+                    "is_seat_selected": true,
+                    "is_waitlisted": true,
+                    "is_boarded": true,
+                    "is_no_show": true,
+                    "is_time_changed": true,
+                    "booked_products": [
+                      {
+                        "product": "string",
+                        "name": "string",
+                        "amount": 0,
+                        "tax": 0,
+                        "quantity": 0,
+                        "price": 0
+                      }
+                    ],
+                    "expire_at": "2022-08-23T11:13:34.780Z",
+                    "ticket_number": 0
+                  }
+                ],
+                "booking_leg_fare_breakdowns": [
+                  "string"
+                ],
+                "booking_leg_stop_fare_breakdowns": [
+                  {}
+                ]
+              }
+            ],
+            "record_locator": "string",
+            "group_name": "string",
+            "booking_agent": "string",
+            "is_cancelled": true,
+            "amount_paid": 0,
+            "amount_due": 0,
+            "amount_pending": 0,
+            "wait_list": "string",
+            "remarks": [
+              {
+                "remark": "string",
+                "date": "2022-08-23T11:13:34.780Z",
+                "remark_by": {}
+              }
+            ],
+            "contacts": [
+              {
+                "title": "string",
+                "first_name": "string",
+                "last_name": "string",
+                "email": "string",
+                "fqtv_number": "string",
+                "zip_code": "string",
+                "address": "string",
+                "addresses": [
+                  "string"
+                ],
+                "phone": "string",
+                "phones": [
+                  "string"
+                ]
+              }
+            ],
+            "payments": [
+              {
+                "amount": 0,
+                "date": "2022-08-23T11:13:34.780Z",
+                "mode_of_payment": "string",
+                "reference": "string",
+                "currency": "string",
+                "remarks": "string",
+                "is_credit": true,
+                "is_deleted": true
+              }
+            ],
+            "booking_histories": [
+              "string"
+            ],
+            "created_by": {},
+            "updated_by": {},
+            "ap_faxes": [
+              "string"
+            ],
+            "expire_at": "2022-08-23T11:13:34.780Z",
+            "booking_transactions": [
+              "string"
+            ]
+          }
+        console.log(booking);
         return new Promise((resolve, reject) => {
-
+            // resolve(booking)
             // this._httpClient.post(environment.serverURL+'/api/bookings', booking)
-            this._httpClient.post(environment.serverURL+'/api/create-booking', booking)
-                .subscribe(_booking => {
-                    // this.getBookings();
-                    // let booking = new Booking(_booking);
-                    resolve(_booking);
-                });
+            // this._httpClient.post(environment.serverURL+'/api/bookings', param)
+            //     .subscribe(_booking => {
+            //         console.log(_booking);
+            //         // this.getBookings();
+            //         // let booking = new Booking(_booking);
+            //         resolve(_booking);
+            //     });
         });
     }
 
@@ -356,11 +601,11 @@ export class BatService {
             this._httpClient
                 .get(`${environment.serverURL}/api/bookings?record_locator=${pnr}`)
                 .subscribe((response: any) => {
-                    console.log(response);
+                    // console.log(response);
                     const _booking = response["hydra:member"][0];
                     let booking = new Booking(_booking);
-                    console.log({ booking });
-                    console.log(booking.recordLocator);
+                    // console.log({ booking });
+                    // console.log(booking.recordLocator);
                     resolve(booking)
                 });
         });

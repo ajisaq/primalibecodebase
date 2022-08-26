@@ -1,9 +1,8 @@
-<div style="display: flex; flex-direction: column;"  fxFlex fxLayout="column" class="p-4 pb-8 pl-16 pr-16 buttons">
+<!-- <div style="display: flex; flex-direction: column;"  fxFlex fxLayout="column" class="p-4 pb-8 pl-16 pr-16 buttons">
     <div *ngIf="!onDCS" fxLayout="row"  (scroll)="_onScroll($event)">
         <div fxFlex>
             {{SeatsFormArray.controls.length}} Seats
         </div>
-        <!-- <div fxFlex> -->
         <div fxFlex="20" fxFlexLayout="end start" [formGroup]="toolBarForm">
             <div fxLayout="row" fxLayoutAlign="end start">
                 <mat-radio-group fxFlex aria-label="Select Mode" name="selectMode" formControlName="selectMode">
@@ -13,21 +12,15 @@
                 </mat-radio-group>
             </div>
             <div fxLayout="row" class="py-8" style="max-width: 120px; height:50px;" fusePerfectScrollbar>
-                <span  *ngFor="let x of selectedIndexedSeatForm | keyvalue"> {{x.key}} <span *ngIf="toolBarForm.controls.selectMode.value=='multiple'">,</span> </span>
+                <span *ngFor="let x of selectedIndexedSeatForm | keyvalue"> {{x.key}} <span *ngIf="toolBarForm.controls.selectMode.value=='multiple'">,</span> </span>
             </div>
             <div fxLayout="row" fxLayoutAlign="end start" *ngIf="toolBarForm.controls.selectMode.value=='multiple'">
                 <div fxFlex>
                     <button mat-raised-button (click)="openCabinSeatDialogue()">Bulk Update</button>
                 </div>
             </div>
-            <!-- <div fxFlexLayout="row">
-                <mat-checkbox name="selectOne" formControlName="selectOne"> Select One </mat-checkbox>
-            </div>
-            <div fxFlexLayout="row">
-                <mat-checkbox name="selectMultiple" formControlName="selectMultiple"> Select Multiple </mat-checkbox>
-            </div> -->
         </div>
-    </div>
+    </div> -->
 
 
 
@@ -101,7 +94,32 @@
     </div> -->
 
     <!-- </div> -->
-    <div style="display: flex; flex-direction: column;" class="drag-area"  (scroll)="_onScroll($event)" (mouseenter)="_onScroll($event)"  (keydown.control)="onControlDown($event)" (keyup.control)="onControlRelease($event)">
+    <div class="d-flex align-item-center justify-content-center">
+      <h4 class="text-center text-small light-weight f-16 primal-text-blue primal-text-bold py-2" style="border-bottom: 1px dotted rgb(6, 7, 66);">Business</h4>
+    </div>
+    <div class="row" *ngFor="let row of businessSeatList; let i = index">
+      <div *ngFor="let col of row; let count = index" [class]="(count == 1) || (count == 2) ? 'col-4 py-1' : 'col-2 py-1'">
+        <button (click)="onSeatSelectedClick(col)" style="position: relative;" [class]="(count >= 2) ? (selectedSeat == col.name ? 'btn btn-sm btn-selected-seat rounded float-end' : 'btn btn-sm btn-seat rounded float-end') : (selectedSeat == col.name ? 'btn btn-sm btn-selected-seat rounded' : 'btn btn-sm btn-seat rounded')">
+          <!-- <span style="position: absolute;" class="f-16 primal-text-bold">{{col.name}}</span> -->
+          <img class="float-end" src="assets/icons/seat-light.svg" alt="" />
+        </button>
+        <!-- {{col.name}} -->
+      </div>
+    </div>
+    <div class="d-flex align-item-center justify-content-center py-3">
+      <h4 class="text-center text-small light-weight f-16 primal-text-blue primal-text-bold py-2" style="border-bottom: 1px dotted rgb(6, 7, 66);">Economy</h4>
+    </div>
+    <div class="row" *ngFor="let row of economySeatList; let i = index">
+      <div *ngFor="let col of row; let count = index" class="col-2 py-1">
+        <button (click)="onSeatSelectedClick(col)" style="position: relative;" [class]="(count >= 3) ? 'btn btn-sm btn-seat rounded float-end' : 'btn btn-sm btn-seat rounded float-start'">
+          <!-- <span style="position: absolute;" class="f-16 primal-text-bold">{{col.name}}</span> -->
+          <img class="float-end" src="assets/icons/seat-light.svg" alt="" />
+        </button>
+        <!-- {{col.name}} -->
+      </div>
+    </div>
+    
+    <!-- <div style="display: flex; flex-direction: column;" class="drag-area"  (scroll)="_onScroll($event)" (mouseenter)="_onScroll($event)"  (keydown.control)="onControlDown($event)" (keyup.control)="onControlRelease($event)">
 
       <dts-select-container
       style="display: flex; flex-direction: column;"
@@ -117,19 +135,19 @@
       <div class="cabin">
         <p style="text-align: center; font-weight: 500;">Cabin</p>
         <div style="display: flex; flex-direction: row;" *ngFor="let row of seatsModel | keyvalue:indexOrderAsc" class="d-flex justify-content-right justify-sp">
-            <!-- <div fxFlex>
+            <div fxFlex>
                 {{row.key}}
-            </div> -->
+            </div>
             
             <div style="display: flex; flex-direction: row; width: 100%;" class="seats" *ngFor="let col of columns;" >
               <div style="display: flex;">
-              <!-- <span>
+              <span>
                 <img
                   class="float-end"
                   src="assets/icons/seat-light.svg"
                   alt=""
                 />
-              </span> -->
+              </span>
                 <button *ngIf="!onDCS && seatsModel[row.key][col] && !seatsModel[row.key][col].controls.isBlocked.value"
                     (click)="onSeatClick(seatsModel[row.key][col],col+row.key)"
                     (dblclick)="onSeatDoubleClick(seatsModel[row.key][col],col+row.key)"
@@ -179,6 +197,6 @@
       </div>
       </dts-select-container>
 
-    </div>
-</div>
+    </div> -->
+<!-- </div> -->
 

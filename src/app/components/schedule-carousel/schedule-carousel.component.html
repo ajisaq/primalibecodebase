@@ -30,14 +30,14 @@
 
 
 <!--  Flights Slider -->
-<div class="position-relative">
+<div class="position-relative slide-main-container">
   <div class="container-fluid">
     <div class="slider-wrapper">
       <div class="slider-container d-flex justify-content-center">
         <div *ngFor="let indexedFlightByDate of getLowestPrices(); let i=index;"
           (click)="selectDate(indexedFlightByDate.displayDate)"
           [style]="(indexedFlightByDate.displayDate == selectedDate) ? 'background-color: var(--primal-blue); color: white' : ''"
-          class="slider-item">
+          class="slider-item shadow p-3 rounded">
           <span class="light-weight">{{formatDisplayDate(indexedFlightByDate.displayDate)}}</span>
           <span class="text-small">From</span>
           <span class="primal-text-bold">{{indexedFlightByDate.flight.adult_cost ? ('N
@@ -46,6 +46,6 @@
       </div>
     </div>
   </div>
-  <button class="position-absolute slider-ctrl-btn prev-btn" appPreviousBtn><i class="bi bi-chevron-left"></i></button>
-  <button class="position-absolute slider-ctrl-btn next-btn" appNextBtn><i class="bi bi-chevron-right"></i></button>
+  <button class="position-absolute shadow slider-ctrl-btn prev-btn" appPreviousBtn><i class="bi bi-chevron-left"></i></button>
+  <button class="position-absolute shadow slider-ctrl-btn next-btn" appNextBtn><i class="bi bi-chevron-right"></i></button>
 </div>

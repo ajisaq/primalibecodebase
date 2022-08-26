@@ -25,7 +25,6 @@ export class FlightSearchService {
     passengerNumber: number = 0;
     searchText: string;
     filterBy: string;
-
     flightDate: any;
     flightNumber: string;
     departureCity: string;
@@ -100,16 +99,13 @@ export class FlightSearchService {
 
     getSeatsOnFlight(flightId: number): Promise<any>
     {
-        console.log('pax flight', flightId);
+        // console.log('pax flight', flightId);
         return new Promise((resolve, reject) => {
                 this._httpClient.get(environment.serverURL+'/api/flights/'+flightId+'/seats')
                     .subscribe((response: any) => {
-
                         this.cabin = new Cabin(response.schedule.aircraft.cabin);
                         this.seats = response.schedule.aircraft.cabin.seats;
-
-                        console.log('cabin',this.cabin);
-                    
+                        console.log('Flight Information',response);       
                         this.onCabinChanged.next(this.cabin);
                         this.onSeatsOnImageChanged.next(this.seats);
                         resolve(this.cabin);
@@ -123,8 +119,8 @@ export class FlightSearchService {
     urlFilterParams() {
         //if choose to use booking legs manifest endpoint. serealise all params
         let filterParam = '?';
-        console.log(filterParam);
-        console.log('c', this.departureCity, this.flightNumber, this.flightDate);
+        // console.log(filterParam);
+        // console.log('c', this.departureCity, this.flightNumber, this.flightDate);
         this.legs.forEach(element => {
             filterParam += 'schedule_leg[]='+encodeURIComponent(element)+'&';
         });
@@ -148,7 +144,7 @@ export class FlightSearchService {
         //     filterParam += x;
         // });
         filterParam += scheduleLeg;
-        console.log(filterParam);
+        // console.log(filterParam);
         
         return filterParam;
     }
@@ -178,7 +174,7 @@ export class FlightSearchService {
                     this.flightSearchResult.next(this.flights);
                     this.flightSearchResultData.next(response);
                     this.noOfPassengersObj.next({adult: AD, child: CH, infant: IN});
-                    console.log('Flight search noPax',this.noOfPassengersObj);
+                    // console.log('Flight search noPax',this.noOfPassengersObj);
                     this.noOfPassengers.next(AD + CH + IN);
                     resolve(response);
                 }, reject);

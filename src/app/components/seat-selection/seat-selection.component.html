@@ -114,7 +114,85 @@
         </div>
       <!-- </div> -->
     </div>
-    <mat-tab-group>
+    <div class="row">
+      <div class="col-12 col-md-4 col-lg-4">
+        <div *ngFor="let bookingLeg of bookingLegs; let i = index">
+          <div *ngFor="let coupon of bookingLeg.coupons; let couponKey = index">
+            <h3 class="f-24 primal-text-blue primal-text-bold mt-4 page-title">
+                Select your Seat(s)
+            </h3>
+            <div class="card my-9">
+              <div (click)="selectedPassenger(coupon, bookingLeg, couponKey)" [class]="(seatSelectionForm.value.selectedPassenger === ('/api/passengers/'+coupon.passenger.id)) ? 'card-body selected p-2 py-3' : 'card-body p-2 py-3'">
+                <div class="">
+                  <h4 class="f-18 primal-text-blue primal-text-bold m-0 page-title">
+                    {{coupon.passenger.title}} {{coupon.passenger.first_name}} {{coupon.passenger.last_name}}
+                  </h4>
+                  <div class="row m-1">
+                    <div class="col-2 col-md-2 col-lg-2 py-3">
+                      <img
+                            class="float-end m-2"
+                            src="assets/icons/seat.svg"
+                            alt=""
+                          />
+                    </div>
+                    <div class="col-10 col-md-10 col-lg-10 py-3">
+                      <div class="row">
+                        <div class="col-6">
+                          <p class="light-weight f-16 text-small text-center">Outbound</p>
+                        </div>
+                        <div class="col-6">
+                          <p class="light-weight f-16 text-small text-center">Inbound</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-6">
+                          <h3 class="light-weight m-0 f-24 text-center primal-text-blue primal-text-bold">
+                            {{coupon.reservedSeatName}}
+                          </h3>
+                        </div>
+                        <div class="col-6">
+                          <h3 class="light-weight m-0 f-18 primal-text-blue primal-text-bold"></h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="row d-md-flex">
+                    <div class="col-md-6 d-flex align-items-center mt-3">
+                      <div class="col-2 d-flex justify-content-right m-r-10">
+                        <span>
+                          <img
+                            class="float-end"
+                            src="assets/icons/seat.svg"
+                            alt=""
+                          />
+                        </span>
+                      </div>
+                    </div>
+                  </div> -->
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-8 col-lg-8 home">
+        <mat-tab-group class="seat-tab">
+          <mat-tab *ngFor="let bookingLegKey of objectKeys(cabinByBookingLegs)"
+            [label]="cabinByBookingLegs[bookingLegKey].flight.departAirport.code + ' - ' + cabinByBookingLegs[bookingLegKey].flight.arriveAirport.code">
+            <mat-card>
+              <mat-card-content class="p-3">
+                <html-seats *ngIf="cabinByBookingLegs[bookingLegKey].cabinForm" [OnDCS]="true"
+                  [seatSelectionForm]="seatSelectionForm" [CabinForm]="cabinByBookingLegs[bookingLegKey].cabinForm"
+                  [ReservedSeats]="reservedSeats" [BlockedSeats]="blockedSeats" (mySelectectSeat)="selectSeat($event)">
+                </html-seats>
+              </mat-card-content>
+            </mat-card>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+    <!-- <mat-tab-group>
         <mat-tab *ngFor="let bookingLegKey of objectKeys(cabinByBookingLegs)" [label]="cabinByBookingLegs[bookingLegKey].flight.departAirport.code + ' - ' + cabinByBookingLegs[bookingLegKey].flight.arriveAirport.code">
           <div class="d-flex dynamic">
             <div class="col-md-3 mt-4 mt-sm-0 mt-md-0">
@@ -152,13 +230,13 @@
             <div class="col-9" style="margin-left: 25px;">
               <mat-card class="example-card">
                 <mat-card-content>
-                  <html-seats *ngIf="cabinByBookingLegs[bookingLegKey].cabinForm" [OnDCS]="true" [seatSelectionForm]="seatSelectionForm" [CabinForm]="cabinByBookingLegs[bookingLegKey].cabinForm" [ReservedSeats]="reservedSeats" [BlockedSeats]="blockedSeats"></html-seats>
+                  <html-seats *ngIf="cabinByBookingLegs[bookingLegKey].cabinForm" [OnDCS]="true" [seatSelectionForm]="seatSelectionForm" [CabinForm]="cabinByBookingLegs[bookingLegKey].cabinForm" [ReservedSeats]="reservedSeats" [BlockedSeats]="blockedSeats" (mySelectectSeat)="selectSeat($event)"></html-seats>
                 </mat-card-content>
               </mat-card>
             </div>
           </div>
         </mat-tab>
         
-    </mat-tab-group>
+    </mat-tab-group> -->
   </div>
 </div>

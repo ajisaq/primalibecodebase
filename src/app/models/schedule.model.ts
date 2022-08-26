@@ -49,7 +49,6 @@ export class Schedule
     hideOnWeb: boolean;
     hideOnAgent: boolean;
 
-
     //   // Format date of a column
     //   dateTimeFormatter(params) {
     //     return moment(params.value, 'YYYY-MM-DD\THH:mm:ssP').format('DD/MM/YYYY HH:mm');
@@ -69,12 +68,9 @@ export class Schedule
         this.iriType        = schedule["@type"] || null;
         this.id             = schedule.id || id;
         this.name           = schedule.name || null;
-
-       
         // isString!=null
         if( true){
         // if(dept>0){
-         
         // dept--;
         this.flightNumber       = schedule.flight_number || 0;
         this.initialDepartCity = new City(schedule.initial_depart_city || {});

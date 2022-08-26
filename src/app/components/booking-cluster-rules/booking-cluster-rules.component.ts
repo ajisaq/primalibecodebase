@@ -28,7 +28,7 @@ export class BookingClusterRulesComponent implements OnInit {
       this.indexedBookingClusters = indexedBookingClusters;
       this.bookingClusterDetail = indexedBookingClusters[this.indexOfBookingCluster];
     });
-    console.log('segment cluster things', this.segmentIndex,this.flight, this.indexedBookingClusters, this.bookingCluster, this.indexOfBookingCluster, this.querySelector);
+    // console.log('segment cluster things', this.segmentIndex,this.flight, this.indexedBookingClusters, this.bookingCluster, this.indexOfBookingCluster, this.querySelector);
     this.selectFlightParameters = {
       segmentIndex: this.segmentIndex||0,
       flight: this.flight,

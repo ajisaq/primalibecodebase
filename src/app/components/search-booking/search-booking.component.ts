@@ -25,13 +25,13 @@ export class SearchBookingComponent implements OnInit {
   searchPNR(e: any) {
     this.isLoading = true;
     e.preventDefault();
-    console.log(this.pnrToSearch.toUpperCase());
+    // console.log(this.pnrToSearch.toUpperCase());
     this.batService.getPNRFromSearch2(this.pnrToSearch)
     .then((resp)=>{
       this.isLoading = false;
       console.log(resp);
       if(resp.status === 'NEW'){
-        console.log('No such PNR');
+        // console.log('No such PNR');
         this.isLoading = false;
         return
       }

@@ -38,9 +38,11 @@ export class SeatSelectionComponent implements OnInit{
     pnr: any;
     selectedSeat: any;
     selectedBookingLeg: any;
+    selectedCouponKey : number = 0;
 
     bookingForm: FormGroup = new FormGroup({});
     booking: any;
+    bookingLegs : any;
     cabinByBookingLegs: any = {};
 
     // Private
@@ -59,15 +61,16 @@ export class SeatSelectionComponent implements OnInit{
         
         this.batService.onBookingFormChanged.pipe().subscribe((bookingForm: FormGroup)=> {
             this.bookingForm = bookingForm;
-            console.log('The booking form', bookingForm);
+            // console.log('The booking form', bookingForm);
             this.booking = bookingForm.getRawValue();
+            // console.log('BookingLegsLength', this.booking.bookingLegs.length)
             if(this.booking.bookingLegs.length > 0){
                 this.generateCabinsByBookingLegs(this.booking);
             }
         });
 
         this.seatSelectionForm.valueChanges.subscribe(val => {
-            console.log( 'new seat selected change',val );
+            // console.log( 'new seat selected change',val );
             this.selectedSeat = val.seat;
             if (val.submit === true) {
                 //submit seat selection
@@ -83,15 +86,14 @@ export class SeatSelectionComponent implements OnInit{
     }
 
     ngOnInit(): void{
-        console.log(this.route.snapshot.queryParams);
+        // console.log(this.route.snapshot.queryParams);
         this.route.paramMap.subscribe((params: any) => {
             this.PNR = params.params.pnr;
             this.flight = params.params.flightId;
-            console.log(this.flight,this.PNR);
+            // console.log(this.flight,this.PNR);
             if(this.PNR){this.batService.onResetOpenPNR.next(this.PNR);}
             //   this.seats = [];
             this.seatsOnFlight();
-        
         })
         
         // this.flightSearchService.onCabinChanged
@@ -113,21 +115,23 @@ export class SeatSelectionComponent implements OnInit{
     }
 
     generateCabinsByBookingLegs(booking: any){
-        let bookingLegs = booking.bookingLegs;
-        bookingLegs.forEach((bookingLeg: any) => {
+        // console.log('Booking Data', booking);
+        this.bookingLegs = booking.bookingLegs;
+        this.bookingLegs.forEach((bookingLeg: any) => {
             this.cabinByBookingLegs[bookingLeg.id] = bookingLeg;
             let flightIri = (bookingLeg.flight.iri) ? bookingLeg.flight.iri : bookingLeg.flight;
             let flightIriSubs = flightIri.split('/');
             let flightId = flightIriSubs[flightIriSubs.length-1];
+            console.log('FlightId', flightId);
             this.flightSearchService.getSeatsOnFlight(flightId)
             .then((response: any)=>{
                 // this.isLoading = false;
-                console.log(response);
+                // console.log(response);
                 this.cabin = response;
                 this.cabinForm = this.createCabinForm(this.cabin);
                 let allSeats = this.cabin.seats;
                 this.cabinByBookingLegs[bookingLeg.id]['cabinForm'] = this.cabinForm;
-                console.log(this.cabinByBookingLegs);
+                // console.log('My Booking Legs', this.cabinByBookingLegs);
             })
             .catch(err=>{
                 console.log(err)
@@ -139,7 +143,7 @@ export class SeatSelectionComponent implements OnInit{
         this.flightSearchService.getSeatsOnFlight(this.flight)
             .then((resp: any)=>{
                 // this.isLoading = false;
-                console.log(resp);
+                console.log(resp.seats);
     // CabinClass1 = economy
     // cabinclass2 = business
                 // let bs = [];
@@ -148,7 +152,6 @@ export class SeatSelectionComponent implements OnInit{
                     if(seat.cabinClass = '/api/cabin_classes/1'){
                         return seat;
                     }
-                
             });
                             
             
@@ -162,14 +165,14 @@ export class SeatSelectionComponent implements OnInit{
 
     }
 
-    selectSeat(name: any){
-        console.log('clicked! ', name)
+    selectSeat(name){
+        this.selectedBookingLeg.coupons[this.selectedCouponKey].reservedSeatName = name;
+        // console.log('seat Name in full', this.selectedBookingLeg)
     }
 
     onSave(): void {
-        console.log('saving...');
+        // console.log('saving...');
         this._manageBookingService.createReservedSeats(this.selectedBookingLeg, this.seatSelectionForm.getRawValue());
-    
     }
 
     /**
@@ -245,8 +248,18 @@ export class SeatSelectionComponent implements OnInit{
         let couponIri = `/api/coupons/${coupon.id}`;
         this.seatSelectionForm.controls['selectedPassenger'].patchValue(paxIri, {emitEvent: false});
         this.seatSelectionForm.controls['coupon'].patchValue(couponIri, {emitEvent: false});
-        console.log(paxIri, this.seatSelectionForm, this.cabinByBookingLegs);
+        // console.log(paxIri, this.seatSelectionForm, this.cabinByBookingLegs);
      }
+    
+    selectedPassenger(coupon: any, bookingLeg?: any, couponKey?: number) {
+        this.selectedBookingLeg = bookingLeg;
+        this.selectedCouponKey = couponKey;
+        let paxIri = `/api/passengers/${coupon.passenger.id}`;
+        let couponIri = `/api/coupons/${coupon.id}`;
+        this.seatSelectionForm.controls['selectedPassenger'].patchValue(paxIri, {emitEvent: false});
+        this.seatSelectionForm.controls['coupon'].patchValue(couponIri, {emitEvent: false});
+        // console.log('New Selected Passanger', this.selectedBookingLeg, this.selectedBookingLeg.coupons[couponKey] );
+    }
 
     ngOnDestroy(): void {
         this._unsubscribeAll.next(false);

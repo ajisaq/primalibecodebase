@@ -4,18 +4,18 @@
     <span class="text-small text-dark"> Modify Search</span>
   </div>
   <div *ngFor="let segment of getFlightSearchFormSegments().controls; let i=index" class="">
-    <div class="  search-outlet">
+    <div class="search-outlet">
       <h3 *ngIf="getFlightSearchFormSegments().controls.length > 2 || i != 1"
         class="text-center text-md-start primal-text-blue primal-text-bold my-4">
-        Outbound {{indexedAirports['/api/airports/'+segment.value.origin]?.code}} -
-        {{indexedAirports['/api/airports/'+segment.value.destination]?.code}}
+        Outbound <small>{{indexedAirports['/api/airports/'+segment.value.origin]?.city?.name}} <strong>-</strong>
+        {{indexedAirports['/api/airports/'+segment.value.destination]?.city?.name}} {{i}}</small>
       </h3>
       <h3 *ngIf="getFlightSearchFormSegments().controls.length == 2 && i == 1"
         class="text-center text-md-start primal-text-blue primal-text-bold my-4">
-        Inbound {{indexedAirports['/api/airports/'+segment.value.origin]?.code}} -
-        {{indexedAirports['/api/airports/'+segment.value.destination]?.code}}
+        Inbound <small>{{indexedAirports['/api/airports/'+segment.value.origin]?.city?.name}} -
+        {{indexedAirports['/api/airports/'+segment.value.destination]?.city?.name}}</small>
       </h3>
-      <div class="">
+      <div class="m-3">
         <app-schedule-carousel [selectedFlightDate]="this.flightSearchForm.getRawValue().segments[i]._chosenDay"
           [segmentIndex]="i" [indexedFlightsByDate]="getSelectedDateRangeLowestPricesByDate(i)"
           (onSelectedFlightDateChanged)="setSelectedDate($event, i)">

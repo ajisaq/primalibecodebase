@@ -78,20 +78,42 @@
                 <i class="bi bi-chevron-down"></i>
               </div>
             </div>
-            <app-booking-cluster-rules
-              *ngFor="let bookingClusterPrice of getPriceListArray(cabinPrice.price_list); let j = index"
-              [segmentIndex]="segmentIndex"
-              [bookingCluster]="bookingClusterPrice"
-              [indexOfBookingCluster]="getPriceListClusterCode(cabinPrice.price_list, j)" 
-              [flight]="singleFlight"
-              [selectedCabinIndex]="i" 
-              querySelector="bc-{{ singleFlight.id }}{{ i }}"
-              [isConnectingFlight]="isConnectingFlight"
-              ></app-booking-cluster-rules>
+            <!-- <div class="col-12">
+              <div class="row">
+                <div class="col-12 col-lg-4">
+                  <app-booking-cluster-rules
+                  *ngFor="let bookingClusterPrice of getPriceListArray(cabinPrice.price_list); let j = index"
+                  [segmentIndex]="segmentIndex"
+                  [bookingCluster]="bookingClusterPrice"
+                  [indexOfBookingCluster]="getPriceListClusterCode(cabinPrice.price_list, j)" 
+                  [flight]="singleFlight"
+                  [selectedCabinIndex]="i" 
+                  querySelector="bc-{{ singleFlight.id }}{{ i }}"
+                  [isConnectingFlight]="isConnectingFlight"
+                  ></app-booking-cluster-rules>
+                </div>
+              </div>
+            </div> -->
           </div>
         </div>
       </div>
 
+    </div>
+    <div class="col-12 p-3" *ngFor="let cabinPrice of singleFlight.cabin_prices; let i = index">
+      <div class="row m-2">
+        <div class="col-12 col-lg-3">
+          <app-booking-cluster-rules
+          *ngFor="let bookingClusterPrice of getPriceListArray(cabinPrice.price_list); let j = index"
+          [segmentIndex]="segmentIndex"
+          [bookingCluster]="bookingClusterPrice"
+          [indexOfBookingCluster]="getPriceListClusterCode(cabinPrice.price_list, j)" 
+          [flight]="singleFlight"
+          [selectedCabinIndex]="i" 
+          querySelector="bc-{{ singleFlight.id }}{{ i }}"
+          [isConnectingFlight]="isConnectingFlight"
+          ></app-booking-cluster-rules>
+        </div>
+      </div>
     </div>
   </div>
 </div>

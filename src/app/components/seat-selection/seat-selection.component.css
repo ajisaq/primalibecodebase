@@ -43,6 +43,19 @@ hr {
 .f-24 {
     font-size: 24px!important;
 }
+.f-16 {
+  font-size: 16px !important;
+}
+.f-18 {
+  font-size: 18px !important;
+}
+
+.f-20 {
+  font-size: 20px!important;
+}
+.f-22 {
+  font-size: 22px !important;
+}
 .selected {
         border-bottom: 6px solid #050a30;
         border-radius: 10px;
@@ -93,4 +106,31 @@ hr {
     display: inline-block!important;
     width: auto;
   }
+}
+
+.home-tab .mat-tab-label.mat-tab-label-active .mat-tab-label-content {
+  background-color: var(--primal-blue);
+  color: #ffffff;
+  display: inline-flex;
+  padding: 10px 20px;
+  font-weight: 700;
+  border-radius: 10px 10px 0 0;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.home-tab .mat-ink-bar.mat-ink-bar {
+  display: none;
+}
+
+.home-tab .mat-tab-label {
+  opacity: 1 !important;
+}
+
+.home-tab .mat-tab-header {
+  min-width: 318px;
+  height: 55px;
+  background-color: #ffffff;
+  border-radius: 15px 15px 0px 0px;
 }

@@ -1,5 +1,5 @@
 import { KeyValue } from '@angular/common';
-import { AfterViewInit, Component, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { toInteger } from 'lodash';
 import { SelectContainerComponent } from 'ngx-drag-to-select'
@@ -16,6 +16,11 @@ export class HtmlSeatsComponent implements OnInit, OnDestroy, AfterViewInit
 
     cabinForm: FormGroup;
 
+    // Seates Array
+
+    businessSeatList : any = [];
+    economySeatList : any = [];
+
     toolBarForm: FormGroup = this._formBuilder.group({
         selectMode: ['single'],
     }); 
@@ -27,9 +32,11 @@ export class HtmlSeatsComponent implements OnInit, OnDestroy, AfterViewInit
         console.log(e);
     }
 
+    selectedSeat : string = '';
+
     sels: any[]=[];
 
-    documents: Array<any> = [];
+    documents: Array<any> = []; 
     // selectedDocuments: Array<any> = [];
     set selectedDocuments(doc:Array<any>){
         console.log('selected......',doc);
@@ -60,6 +67,7 @@ export class HtmlSeatsComponent implements OnInit, OnDestroy, AfterViewInit
     get selectedDocuments(){
         return this.sels;
     }
+
     selectOnDrag = true;
     selectMode = false;
     disable = false;
@@ -84,11 +92,36 @@ export class HtmlSeatsComponent implements OnInit, OnDestroy, AfterViewInit
 
     @Input()
     set CabinForm(cabinForm: FormGroup){
+        let seats = cabinForm.getRawValue().seats;
+
+        let businessSeates = seats.filter((x : any) => x.cabinClass == '/api/cabin_classes/2')
+        .sort((a : any, b : any) => a.seatRow - b.seatRow);
+
+        let economySeates : any = seats.filter((x : any) => x.cabinClass == '/api/cabin_classes/1')
+        .sort((a : any, b : any) => a.seatRow - b.seatRow);
+
+        for(let i = businessSeates[0].seatRow; i <= businessSeates[businessSeates.length - 1].seatRow; i++){
+            let row = businessSeates.filter((x : any) => x.seatRow == i);
+            this.businessSeatList.push(row);
+        }
+
+        for(let c = economySeates[0].seatRow; c <= economySeates[economySeates.length - 1].seatRow; c++){
+            let row = economySeates.filter((x : any) => x.seatRow == c);
+            this.economySeatList.push(row);
+        }
+        // .sort((a : any, b : any) => a.seatColumn.localeCompare(b.seatColumn));
+
+        // console.log('My Cabin Form',this.economySeatList);
+
         this.cabinForm = cabinForm;
         this.setupUI();
         this.cabinForm.valueChanges
             .subscribe(val=>this.setupUI())
     }
+
+    // return this.data.sort((a, b) => {
+    //     return new Date(a.CREATE_TS) - new Date(b.CREATE_TS);
+    //   });
 
     reservedSeats: any[] = [];
     blockedSeats: any[] = [];
@@ -103,6 +136,8 @@ export class HtmlSeatsComponent implements OnInit, OnDestroy, AfterViewInit
         this.blockedSeats = blockedSeats;
         this.updateModels();
     }
+
+    @Output() mySelectectSeat = new EventEmitter<string>();
 
     maxRows: number = 0;
     maxCols: number = 0;
@@ -180,7 +215,7 @@ export class HtmlSeatsComponent implements OnInit, OnDestroy, AfterViewInit
                 this.columns=arr;
             }
         }
-        console.log("Modeled Seats",this.seatsModel);
+        //console.log("Modeled Seats",this.seatsModel);
     }
 
     get SeatsFormArray(): FormArray{
@@ -220,6 +255,14 @@ export class HtmlSeatsComponent implements OnInit, OnDestroy, AfterViewInit
     openCabinSeatDialogue(){
         console.log('no dialog to open. may cange to select save');
     }
+
+    onSeatSelectedClick(seat : any) {
+        // console.log('Selected Seat',seat);
+        this.mySelectectSeat.emit(seat.name);
+        this.selectedSeat = seat.name;
+        this.seatSelectionForm.controls['seat'].patchValue(seat.iri,{emitEvent:true});
+        // console.log('Submit Form Data', this.seatSelectionForm)
+    }
     onSeatClick(seatForm:FormGroup,seatKey:string): void {
         
         // compare first click to this click and see if they occurred within double click threshold
@@ -230,7 +273,7 @@ export class HtmlSeatsComponent implements OnInit, OnDestroy, AfterViewInit
         } else {
             // not a double click so set as a new first click
             console.log('seatClicked: ', seatKey);
-        
+            this.mySelectectSeat.emit(seatKey)
             // this.hoverX = e.x;
             // this.hoverY = e.y+200;
             

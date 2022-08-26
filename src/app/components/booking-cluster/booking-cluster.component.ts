@@ -12,11 +12,12 @@ export class BookingClusterComponent implements OnInit {
   @Input() set flight(flt: any){
     // if(!this.isConnectingFlight){
       this.singleFlight = flt;
+      console.log(flt)
     // }else{
     //   this.prepareConnectingFlight(flt);
     //   console.log('connectingflt', flt);
     // }
-    console.log(flt, this.isConnectingFlight);
+    // console.log(flt, this.isConnectingFlight);
   }
   @Input() segmentIndex?: number;
   @Input() indexOfFlight!: any;
@@ -41,7 +42,7 @@ export class BookingClusterComponent implements OnInit {
       this.singleFlight = this.singleFlight;
     }else{
       this.prepareConnectingFlight(this.singleFlight);
-      console.log('connectingflt', this.singleFlight);
+      // console.log('connectingflt', this.singleFlight);
     }
   }
   getPriceListArray(priceList: any): any[]{
@@ -65,10 +66,10 @@ export class BookingClusterComponent implements OnInit {
     let lastSegmentIndex = Object.keys(connectingFlt).sort()[Object.keys(connectingFlt).length-1];
     this.connectingCount = Object.keys(connectingFlt).length-1;
     this.singleFlight = this.mergeFlights(connectingFlt[firstSegmentIndex], connectingFlt[lastSegmentIndex]);
-    console.log('gflt', this.singleFlight)
+    // console.log('gflt', this.singleFlight)
   }
   mergeFlights(x:any,y:any){
-    console.log('mflt',x);
+    // console.log('mflt',x);
     let newMerged = JSON.parse(JSON.stringify(x));
     newMerged.flight_number = newMerged.flight_number + ' - ' + y.flight_number;
     newMerged.arrive_airport = y.arrive_airport;
@@ -81,7 +82,7 @@ export class BookingClusterComponent implements OnInit {
     let cps: any = {}; //object to store similar cabinprices across connecting point/flights
     let sIndex = 0;
 
-    console.log('connecting object', this.singleFlight);
+    // console.log('connecting object', this.singleFlight);
     Object.keys(this.singleFlight).forEach((segment:any) => {
       this.singleFlight[segment].cabin_prices.forEach((cabinPrice: any) => {
         if(sIndex === 0){
@@ -93,7 +94,7 @@ export class BookingClusterComponent implements OnInit {
       });
       sIndex++;
     });
-    console.log('cps', cps);
+    // console.log('cps', cps);
     Object.keys(cps).forEach(key => {
       if(cps[key].length === Object.keys(this.singleFlight).length){
         //merge cps[key]
@@ -104,7 +105,7 @@ export class BookingClusterComponent implements OnInit {
           merged.seats_left = (merged.seats_left < cabin.seats_left) ? merged.seats_left : cabin.seats_left;
           return (merged || cabin);
         }, {});
-        console.log('reduced mcps', mcps);
+        // console.log('reduced mcps', mcps);
         // reduce and return single object
         newMerged.cabin_prices.push(mcps)
       }
