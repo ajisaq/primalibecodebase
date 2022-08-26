@@ -14,10 +14,12 @@ import { tap } from "rxjs/operators";
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-    constructor(public auth: AuthenticationService, public router: Router) { }
+    constructor(public auth: AuthenticationService, public router: Router) { 
+        console.log(this.auth.getToken());
+    }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        // console.log('Intercepted by TokenInterceptor');
+        console.log('Intercepted by TokenInterceptor');
         request = request.clone({
             setHeaders: {
                 Authorization: `Bearer ${this.auth.getToken()}`,
