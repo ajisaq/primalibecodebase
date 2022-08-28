@@ -179,7 +179,7 @@
       <div class="col-12 col-md-8 col-lg-8 home">
         <mat-tab-group class="seat-tab">
           <mat-tab *ngFor="let bookingLegKey of objectKeys(cabinByBookingLegs)"
-            [label]="cabinByBookingLegs[bookingLegKey].flight.departAirport.code + ' - ' + cabinByBookingLegs[bookingLegKey].flight.arriveAirport.code">
+            [label]="cabinByBookingLegs[bookingLegKey].flight.departAirport.state + ' - ' + cabinByBookingLegs[bookingLegKey].flight.arriveAirport.state">
             <mat-card>
               <mat-card-content class="p-3">
                 <html-seats *ngIf="cabinByBookingLegs[bookingLegKey].cabinForm" [OnDCS]="true"

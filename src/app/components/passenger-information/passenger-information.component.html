@@ -50,13 +50,13 @@
                 <input type="date" placeholder="Date Of Birth" formControlName="dateOfBirth" />
               </div>
             </div> -->
-            <div class="col-12 col-md-6 mb-3">
+            <div class="col-12 col-md-6 mb-3" [ngClass]="i > 0 ? 'hide-input' : ''">
               <div class="d-flex align-items-center input-wrapper position-relative">
                 <span class="me-3"><img src="assets/icons/phone.svg" alt="" /></span>
                 <input type="text" placeholder="Phone" formControlName="phone" />
               </div>
             </div>
-            <div class="col-12 col-md-6 mb-3">
+            <div class="col-12 col-md-6 mb-3" [ngClass]="i > 0 ? 'hide-input' : ''">
               <div class="d-flex align-items-center input-wrapper position-relative">
                 <span class="me-3"><img src="assets/icons/envelope.svg" alt="" /></span>
                 <input type="text" placeholder="Email Address" formControlName="email" />

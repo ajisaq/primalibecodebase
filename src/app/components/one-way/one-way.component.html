@@ -8,7 +8,7 @@
       <h3 *ngIf="getFlightSearchFormSegments().controls.length > 2 || i != 1"
         class="text-center text-md-start primal-text-blue primal-text-bold my-4">
         Outbound <small>{{indexedAirports['/api/airports/'+segment.value.origin]?.city?.name}} <strong>-</strong>
-        {{indexedAirports['/api/airports/'+segment.value.destination]?.city?.name}} {{i}}</small>
+        {{indexedAirports['/api/airports/'+segment.value.destination]?.city?.name}}</small>
       </h3>
       <h3 *ngIf="getFlightSearchFormSegments().controls.length == 2 && i == 1"
         class="text-center text-md-start primal-text-blue primal-text-bold my-4">
@@ -22,7 +22,7 @@
         </app-schedule-carousel>
       </div>
       <app-booking-cluster *ngFor="let flight of getSelectedDateFlights(i); let j = index" [flight]="flight"
-        [segmentIndex]="i" [indexOfFlight]="j" [indexedAirports]="indexedAirports"></app-booking-cluster>
+        [segmentIndex]="i" [indexOfFlight]="j" [indexedAirports]="indexedAirports" [stepper]="stepper"></app-booking-cluster>
       <app-booking-cluster *ngFor="let flight of getSelectedDateConnectingFlights(i); let j = index" [flight]="flight"
         [isConnectingFlight]="true" [segmentIndex]="i" [indexOfFlight]="j" [indexedAirports]="indexedAirports"></app-booking-cluster>
     </div>

@@ -17,9 +17,16 @@ import { FlightSearchService } from 'src/app/services/flightSearch.service';
   encapsulation: ViewEncapsulation.None
 })
 export class PaymentComponent implements OnInit {
-  @ViewChild('stepper') private myStepper!: MatStepper;
+  @ViewChild('stepper') public myStepper!: MatStepper;
+  stepper = this.myStepper;
   isLoadingFlights: boolean = false;
   isSubmitted: boolean = false;
+  isNewBooking : boolean = false;
+  isLinear = true;
+  isStepCompleted : any = {
+    'selection' : false,
+    'payment' : false
+  };
   id: any = '';
 
   constructor(
@@ -28,14 +35,20 @@ export class PaymentComponent implements OnInit {
     ) { 
       this.flightSearchService.isLoadingFlights.pipe().subscribe(res => {
         this.isLoadingFlights = res;
-        console.log('payment loading status', this.isLoadingFlights);
+        // console.log('payment loading status', this.isLoadingFlights);
         
       });
       this.batService.continueToPassengerInformation.pipe().subscribe(res => {
         if(res) {
-          console.log('cont to pax info',res);
           this.myStepper.next();
         }
+      });
+      this.batService.bookingPaymentFloor.pipe().subscribe(res => {
+        res == 'selection' ? this.isStepCompleted.selection = true : null;
+        res == 'payment' ? this.isStepCompleted.payment = true : null;
+      });
+      this.batService.isNewBooking.pipe().subscribe(res => {
+        this.isNewBooking = res;
       });
   }
 

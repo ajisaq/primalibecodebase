@@ -137,10 +137,11 @@ export class FlightSearchComponent {
 
     //  this.searchFlight();
     //  console.log('Form Value is', this.flightSearchForm.value);
-    this.isSearching = true;
-    this.flightSearchService.isLoadingFlights.next(this.isSearching);
     if (this.flightSearchForm.status == 'VALID'){
       // Navigate to the result page with extras
+      this.isSearching = true;
+      this.flightSearchService.isLoadingFlights.next(this.isSearching);
+      this.batService.isNewBooking.next(true);
       let params: any = new URLSearchParams(
         {origin: this.flightSearchForm.value.origin, 
         destination: this.flightSearchForm.value.destination, 
@@ -149,7 +150,7 @@ export class FlightSearchComponent {
         child: this.flightSearchForm.value.passengers.child,
         infant: this.flightSearchForm.value.passengers.infant}
         ).toString();
-      console.log('urlparams',params);
+      // console.log('urlparams',params);
       this.router.navigateByUrl(`/payment?${params}${(this.flightSearchForm.value.tripType == 'roundTrip') ? '&returnDate='+this.flightSearchForm.value.returnDate : ''}`);
     }
   }

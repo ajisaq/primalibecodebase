@@ -41,3 +41,19 @@
   background: rgba(171, 104, 201, 0.1);
   border: 2px solid #ab68c9;
 }
+
+.h-80 {
+  height: 80px !important;
+}
+
+.h-100 {
+  height: 100px !important;
+}
+
+.h-150 {
+  height: 150px !important;
+}
+
+.h-200 {
+  height: 200px;
+}

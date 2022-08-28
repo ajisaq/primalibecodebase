@@ -74,6 +74,7 @@ export class OneWayComponent implements OnInit {
   selectedDate: string = '';
   selectedDates: any = {};
 
+  @Input() stepper!: any;
   @Input() set flightSearchFormParams(searchParams: any){
     // if(searchParams.origin && searchParams.destination && searchParams.departureDate){
         this.flightsearchParams = searchParams;

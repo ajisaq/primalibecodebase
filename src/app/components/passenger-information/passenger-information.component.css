@@ -83,6 +83,10 @@ label {
   border-radius: 15px;
 }
 
+.hide-input {
+  display: none !important;
+}
+
 @keyframes click-wave {
   0% {
     height: 40px;

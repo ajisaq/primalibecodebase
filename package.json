@@ -43,6 +43,7 @@
     "@angular/cli": "^14.1.2",
     "@angular/compiler-cli": "^14.1.2",
     "@types/jasmine": "^4.0.3",
+    "@types/jquery": "^3.5.14",
     "@types/lodash": "^4.14.182",
     "@types/node": "^18.7.3",
     "jasmine-core": "^4.3.0",

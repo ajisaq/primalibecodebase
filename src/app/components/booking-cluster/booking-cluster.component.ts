@@ -4,15 +4,14 @@ import { BatService } from 'src/app/services/bat.service';
 @Component({
   selector: 'app-booking-cluster',
   templateUrl: './booking-cluster.component.html',
-  styleUrls: ['./booking-cluster.component.css']
+  styleUrls: ['./booking-cluster.component.css'],
 })
 export class BookingClusterComponent implements OnInit {
-
   @Input() isConnectingFlight: boolean = false;
-  @Input() set flight(flt: any){
+  @Input() set flight(flt: any) {
     // if(!this.isConnectingFlight){
-      this.singleFlight = flt;
-      console.log(flt)
+    this.singleFlight = flt;
+    console.log(flt);
     // }else{
     //   this.prepareConnectingFlight(flt);
     //   console.log('connectingflt', flt);
@@ -22,13 +21,17 @@ export class BookingClusterComponent implements OnInit {
   @Input() segmentIndex?: number;
   @Input() indexOfFlight!: any;
   @Input() indexedAirports!: any;
+  @Input() stepper!: any;
   panelOpenState = false;
   singleFlight!: any;
   cabinName!: any;
   connectingCount: number = 0;
+  toggleFirst: boolean = false;
+  isToggle: boolean = false;
+  toggleTargetId: string = '';
+  toggleSelectedID: string = '';
 
-
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     // this.flight.map((flight: any) => {
@@ -38,37 +41,74 @@ export class BookingClusterComponent implements OnInit {
     //   })
     // })
     // console.log([this.singleFlight.id]);
-    if(!this.isConnectingFlight){
+    if (!this.isConnectingFlight) {
       this.singleFlight = this.singleFlight;
-    }else{
+    } else {
       this.prepareConnectingFlight(this.singleFlight);
       // console.log('connectingflt', this.singleFlight);
     }
   }
-  getPriceListArray(priceList: any): any[]{
+
+  toggleId(targetId, index) {
+    if (this.toggleSelectedID == '' && this.isToggle != true) {
+      return '#bc-' + targetId + index;
+    } else if (
+      this.toggleSelectedID == String(targetId + index) &&
+      this.isToggle == true
+    ) {
+      return '#bc-' + targetId + index;
+    } else {
+      return '.bc-' + targetId;
+    }
+  }
+
+  toggleClusters(targetId, index) {
+    if (this.toggleSelectedID == '' && this.isToggle != true) {
+      this.toggleSelectedID = String(targetId + index);
+      this.isToggle = true;
+    } else if (
+      this.toggleSelectedID == String(targetId + index) &&
+      this.isToggle == true
+    ) {
+      this.toggleSelectedID = '';
+      this.isToggle = false;
+    } else {
+      this.toggleSelectedID = String(targetId + index);
+    }
+  }
+
+  getPriceListArray(priceList: any): any[] {
     let priceListResult: any[] = [];
-    Object.keys(priceList || {}).forEach((obj: string) => {priceListResult.push(priceList[obj])});
+    Object.keys(priceList || {}).forEach((obj: string) => {
+      priceListResult.push(priceList[obj]);
+    });
     return priceListResult;
   }
-  getPriceListClusterCode(priceList: any, index: number): string{
+
+  getPriceListClusterCode(priceList: any, index: number): string {
     let priceListResult: string = '';
     let i = 0;
-    Object.keys(priceList).forEach((key: string)=> {if(i==index){priceListResult = key}; i++});
+    Object.keys(priceList).forEach((key: string) => {
+      if (i == index) {
+        priceListResult = key;
+      }
+      i++;
+    });
     return priceListResult;
   }
-  // getPriceListClusterCode(priceList: any, index: number): any[]{
-  //   let priceListResult: any[] = [];
-  //   Object.keys(priceList).forEach(obj=> priceListResult.push(obj));
-  //   return priceListResult[index];
-  // }
-  prepareConnectingFlight(connectingFlt: any){
+
+  prepareConnectingFlight(connectingFlt: any) {
     let firstSegmentIndex = Object.keys(connectingFlt).sort()[0];
-    let lastSegmentIndex = Object.keys(connectingFlt).sort()[Object.keys(connectingFlt).length-1];
-    this.connectingCount = Object.keys(connectingFlt).length-1;
-    this.singleFlight = this.mergeFlights(connectingFlt[firstSegmentIndex], connectingFlt[lastSegmentIndex]);
+    let lastSegmentIndex =
+      Object.keys(connectingFlt).sort()[Object.keys(connectingFlt).length - 1];
+    this.connectingCount = Object.keys(connectingFlt).length - 1;
+    this.singleFlight = this.mergeFlights(
+      connectingFlt[firstSegmentIndex],
+      connectingFlt[lastSegmentIndex]
+    );
     // console.log('gflt', this.singleFlight)
   }
-  mergeFlights(x:any,y:any){
+  mergeFlights(x: any, y: any) {
     // console.log('mflt',x);
     let newMerged = JSON.parse(JSON.stringify(x));
     newMerged.flight_number = newMerged.flight_number + ' - ' + y.flight_number;
@@ -77,39 +117,45 @@ export class BookingClusterComponent implements OnInit {
     newMerged.arrive_date = y.arrive_date;
     newMerged.eta = y.eta;
     newMerged.adult_cost += y.adult_cost;
-    newMerged.available_seats = (newMerged.available_seats < y.available_seats) ? newMerged.available_seats : y.available_seats;
-    newMerged.cabin_prices =  [];
+    newMerged.available_seats =
+      newMerged.available_seats < y.available_seats
+        ? newMerged.available_seats
+        : y.available_seats;
+    newMerged.cabin_prices = [];
     let cps: any = {}; //object to store similar cabinprices across connecting point/flights
     let sIndex = 0;
 
     // console.log('connecting object', this.singleFlight);
-    Object.keys(this.singleFlight).forEach((segment:any) => {
+    Object.keys(this.singleFlight).forEach((segment: any) => {
       this.singleFlight[segment].cabin_prices.forEach((cabinPrice: any) => {
-        if(sIndex === 0){
-          cps[cabinPrice.code]=[];
+        if (sIndex === 0) {
+          cps[cabinPrice.code] = [];
         }
-        if(cps.hasOwnProperty(cabinPrice.code)){
+        if (cps.hasOwnProperty(cabinPrice.code)) {
           cps[cabinPrice.code].push(cabinPrice);
         }
       });
       sIndex++;
     });
     // console.log('cps', cps);
-    Object.keys(cps).forEach(key => {
-      if(cps[key].length === Object.keys(this.singleFlight).length){
+    Object.keys(cps).forEach((key) => {
+      if (cps[key].length === Object.keys(this.singleFlight).length) {
         //merge cps[key]
         let mcps = cps[key]?.reduce(function (merged: any, cabin: any) {
           merged.adult_cost = (merged.adult_cost || 0) + cabin.adult_cost;
           merged.cost = (merged.cost || 0) + cabin.cost;
           merged.price = (merged.price || 0) + cabin.price;
-          merged.seats_left = (merged.seats_left < cabin.seats_left) ? merged.seats_left : cabin.seats_left;
-          return (merged || cabin);
+          merged.seats_left =
+            merged.seats_left < cabin.seats_left
+              ? merged.seats_left
+              : cabin.seats_left;
+          return merged || cabin;
         }, {});
         // console.log('reduced mcps', mcps);
         // reduce and return single object
-        newMerged.cabin_prices.push(mcps)
+        newMerged.cabin_prices.push(mcps);
       }
-    })
+    });
     return newMerged;
   }
 }

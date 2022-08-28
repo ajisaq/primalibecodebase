@@ -5,21 +5,20 @@
         <div class="col-12 {{(singleFlight.cabin_prices.length == 1) ? 'col-lg-6' : 'col-lg-4'}}">
           <div class="row justify-content-center">
             <div class="col-4 d-flex flex-column">
-              <span class="flight-time">{{
-                singleFlight.etd | date: "hh:mm"
-                }}</span>
-              <span class="mt-2 state-code primal-text-bold">{{
-                indexedAirports[singleFlight.depart_airport]?.city.code
-                }}</span>
-              <span class="state-name">{{
-                indexedAirports[singleFlight.depart_airport]?.city.name
-                }}</span>
+              <span class="flight-time">
+                {{singleFlight.etd | date: "hh:mm"}}
+              </span>
+              <span class="mt-2 state-code primal-text-bold">
+                {{indexedAirports[singleFlight.depart_airport]?.city.code}}
+              </span>
+              <span class="state-name">
+                {{indexedAirports[singleFlight.depart_airport]?.city.name}}
+              </span>
             </div>
-            <div class="col-4 d-flex position-relative">
-              <small class="text-small light-weight position-absolute top-30 start-50 translate-middle-x mb-2"> Flight:
-                {{
-                singleFlight.flight_number
-                }}</small>
+            <div class="col-4 h-100 m-0 p-0 d-flex position-relative">
+              <small class="text-small light-weight position-absolute top-30 start-50 translate-middle-x"> Flight:
+                {{singleFlight.flight_number}}
+              </small>
               <span class="
                   circle circle-top
                   position-absolute
@@ -34,23 +33,22 @@
                   start-50
                   translate-middle
                 "></span>
-                <small *ngIf="isConnectingFlight" class="text-small light-weight position-absolute bottom-0 start-50 translate-middle-x mb-2"> Connecting:
-                  {{
-                  connectingCount
-                  }}
-                  <mat-icon aria-hidden="false" aria-label="More Details">info</mat-icon>
-                </small>
+              <small *ngIf="isConnectingFlight"
+                class="text-small light-weight position-absolute bottom-0 start-50 translate-middle-x mb-2"> 
+                Connecting: {{connectingCount}}
+                <mat-icon aria-hidden="false" aria-label="More Details">info</mat-icon>
+              </small>
             </div>
             <div class="col-4 d-flex flex-column">
-              <span class="flight-time">{{
-                singleFlight.eta | date: "hh:mm"
-                }}</span>
-              <span class="mt-2 state-code primal-text-bold">{{
-                indexedAirports[singleFlight.arrive_airport]?.city.code
-                }}</span>
-              <span class="state-name">{{
-                indexedAirports[singleFlight.arrive_airport]?.city.name
-                }}</span>
+              <span class="flight-time">
+                {{singleFlight.eta | date: "hh:mm"}}
+              </span>
+              <span class="mt-2 state-code primal-text-bold">
+                {{indexedAirports[singleFlight.arrive_airport]?.city.code}}
+              </span>
+              <span class="state-name">
+                {{indexedAirports[singleFlight.arrive_airport]?.city.name}}
+              </span>
             </div>
           </div>
         </div>
@@ -58,153 +56,49 @@
           class="col-12 {{(singleFlight.cabin_prices.length == 1) ? 'col-lg-6' : 'col-lg-4'}}">
           <div class="row my-2 justify-content-between">
             <div class="col-4 d-flex flex-column justify-content-center">
-              <span class="">{{ cabinPrice.name }}</span>
-              <span class="text-danger text-small seats-left light-weight">{{ cabinPrice.seats_left }} Seats left</span>
+              <span class="">
+                {{ cabinPrice.name }}
+              </span>
+              <span class="text-danger text-small seats-left light-weight">
+                {{ cabinPrice.seats_left }} Seats left
+              </span>
             </div>
-            <div class="col-7" data-bs-toggle="collapse" attr.data-bs-target="#bc-{{ singleFlight.id }}{{ i }}"
-              aria-expanded="false" attr.aria-controls="bc-{{ singleFlight.id }}{{ i }}">
+            <div class="col-7" data-bs-toggle="collapse" attr.data-bs-target="{{ toggleId(singleFlight.id, i) }}"
+              aria-expanded="false" attr.aria-controls="bc-{{ singleFlight.id }}{{ i }}"
+              (click)="toggleClusters(singleFlight.id, i)">
               <div class="
                   class-price-container
                   p-2
-                  price-economy-bg
                   d-flex
                   justify-content-between
                   align-items-center
-                ">
+                " 
+                [ngClass]="[cabinPrice.name == 'Business' ? 'price-business-bg' : 'price-economy-bg']"
+                >
                 <div class="col-8 d-flex flex-column">
                   <span class="text-small">From</span>
-                  <span class="class-price">N {{ cabinPrice.cost | number }}.00</span>
+                  <span class="class-price">N {{ cabinPrice.cost | number : '1.2-2' }}</span>
                 </div>
                 <i class="bi bi-chevron-down"></i>
               </div>
             </div>
-            <!-- <div class="col-12">
-              <div class="row">
-                <div class="col-12 col-lg-4">
-                  <app-booking-cluster-rules
-                  *ngFor="let bookingClusterPrice of getPriceListArray(cabinPrice.price_list); let j = index"
-                  [segmentIndex]="segmentIndex"
-                  [bookingCluster]="bookingClusterPrice"
-                  [indexOfBookingCluster]="getPriceListClusterCode(cabinPrice.price_list, j)" 
-                  [flight]="singleFlight"
-                  [selectedCabinIndex]="i" 
-                  querySelector="bc-{{ singleFlight.id }}{{ i }}"
-                  [isConnectingFlight]="isConnectingFlight"
-                  ></app-booking-cluster-rules>
-                </div>
-              </div>
-            </div> -->
           </div>
         </div>
       </div>
 
     </div>
-    <div class="col-12 p-3" *ngFor="let cabinPrice of singleFlight.cabin_prices; let i = index">
-      <div class="row m-2">
-        <div class="col-12 col-lg-3">
+    <div class="col-12 m-0 p-0" *ngFor="let cabinPrice of singleFlight.cabin_prices; let i = index">
+      <div class="row m-0 p-0">
+        <div class="col-12 col-lg-3 p-0 m-0">
           <app-booking-cluster-rules
-          *ngFor="let bookingClusterPrice of getPriceListArray(cabinPrice.price_list); let j = index"
-          [segmentIndex]="segmentIndex"
-          [bookingCluster]="bookingClusterPrice"
-          [indexOfBookingCluster]="getPriceListClusterCode(cabinPrice.price_list, j)" 
-          [flight]="singleFlight"
-          [selectedCabinIndex]="i" 
-          querySelector="bc-{{ singleFlight.id }}{{ i }}"
-          [isConnectingFlight]="isConnectingFlight"
-          ></app-booking-cluster-rules>
+            *ngFor="let bookingClusterPrice of getPriceListArray(cabinPrice.price_list); let j = index"
+            [segmentIndex]="segmentIndex" [bookingCluster]="bookingClusterPrice"
+            [indexOfBookingCluster]="getPriceListClusterCode(cabinPrice.price_list, j)" [flight]="singleFlight"
+            [selectedCabinIndex]="i" querySelector="{{ 'bc-'+singleFlight.id + i }}"
+            classSelector="bc-{{ singleFlight.id }}" [toggleSelectedID]="toggleSelectedID"
+            [isConnectingFlight]="isConnectingFlight" [stepper]="stepper"></app-booking-cluster-rules>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<!-- N  E  W -->
-<!-- <div class="col-12 my-3">
-  <div class="card">
-    <div class="row my-card-header">
-      <div class="col-12 {{(singleFlight.cabin_prices.length == 1) ? 'col-lg-6' : 'col-lg-4'}}">
-        <div class="row justify-content-center">
-          <div class="col-4 d-flex flex-column">
-            <span class="flight-time">{{
-              singleFlight.etd | date: "hh:mm"
-              }}</span>
-            <span class="mt-2 state-code primal-text-bold">{{
-              indexedAirports[singleFlight.depart_airport]?.city.code
-              }}</span>
-            <span class="state-name">{{
-              indexedAirports[singleFlight.depart_airport]?.city.name
-              }}</span>
-          </div>
-          <div class="col-4 d-flex position-relative">
-            <small class="text-small light-weight position-absolute top-30 start-50 translate-middle-x mb-2"> Flight:
-              {{
-              singleFlight.flight_number
-              }}</small>
-            <span class="
-                circle circle-top
-                position-absolute
-                top-50
-                start-50
-                translate-middle
-              "></span>
-            <span class="
-                line line-long
-                position-absolute
-                top-50
-                start-50
-                translate-middle
-              "></span>
-          </div>
-          <div class="col-4 d-flex flex-column">
-            <span class="flight-time">{{
-              singleFlight.eta | date: "hh:mm"
-              }}</span>
-            <span class="mt-2 state-code primal-text-bold">{{
-              indexedAirports[singleFlight.arrive_airport]?.city.code
-              }}</span>
-            <span class="state-name">{{
-              indexedAirports[singleFlight.arrive_airport]?.city.name
-              }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="row">
-
-        <div *ngFor="let cabinPrice of singleFlight.cabin_prices; let i = index"
-          class="col-12 {{(singleFlight.cabin_prices.length == 1) ? 'col-lg-6' : 'col-lg-4'}}">
-          <div class="row my-2 justify-content-between">
-            <div class="col-4 d-flex flex-column justify-content-center">
-              <span class="">{{ cabinPrice.name }}</span>
-              <span class="text-danger text-small seats-left light-weight">{{ cabinPrice.seats_left }} Seats left</span>
-            </div>
-            <div class="col-7" data-bs-toggle="collapse" attr.data-bs-target="#bc-{{ singleFlight.id }}{{ i }}"
-              aria-expanded="false" attr.aria-controls="bc-{{ singleFlight.id }}{{ i }}">
-              <div class="
-                  class-price-container
-                  p-2
-                  price-economy-bg
-                  d-flex
-                  justify-content-between
-                  align-items-center
-                ">
-                <div class="col-8 d-flex flex-column">
-                  <span class="text-small">From</span>
-                  <span class="class-price">N {{ cabinPrice.cost | number }}.00</span>
-                </div>
-                <i class="bi bi-chevron-down"></i>
-              </div>
-            </div>
-            <app-booking-cluster-rules
-              *ngFor="let bookingClusterPrice of getPriceListArray(cabinPrice.price_list); let j = index"
-              [segmentIndex]="segmentIndex" [bookingCluster]="bookingClusterPrice"
-              [indexOfBookingCluster]="getPriceListClusterCode(cabinPrice.price_list, j)" [flight]="singleFlight"
-              [selectedCabinIndex]="i" querySelector="bc-{{ singleFlight.id }}{{ i }}"></app-booking-cluster-rules>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div> -->
